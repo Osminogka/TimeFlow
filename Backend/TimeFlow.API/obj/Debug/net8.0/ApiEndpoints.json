@@ -1,0 +1,34 @@
+[
+  {
+    "ContainingType": "TimeFlow.API.Controllers.AuthenticationController",
+    "Method": "LoginAsync",
+    "RelativePath": "api/a/Authentication/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "TimeFlow.DAL.Models.LoginRequestModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TimeFlow.API.Controllers.AuthenticationController",
+    "Method": "RegisterAsync",
+    "RelativePath": "api/a/Authentication/register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "TimeFlow.DAL.Models.RegisterRequestModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

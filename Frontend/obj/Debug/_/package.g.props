@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <PropertyGroup>
+    <PackageJsonName Condition="$(PackageJsonName) == ''">front</PackageJsonName>
+    <PackageJsonVersion Condition="$(PackageJsonVersion) == ''">0.1.0</PackageJsonVersion>
+    <PackageJsonPrivate Condition="$(PackageJsonPrivate) == ''">true</PackageJsonPrivate>
+    <PackageJsonScriptsServe Condition="$(PackageJsonScriptsServe) == ''">vue-cli-service serve</PackageJsonScriptsServe>
+    <PackageJsonScriptsBuild Condition="$(PackageJsonScriptsBuild) == ''">vue-cli-service build</PackageJsonScriptsBuild>
+    <PackageJsonScriptsLint Condition="$(PackageJsonScriptsLint) == ''">vue-cli-service lint</PackageJsonScriptsLint>
+    <PackageJsonDependenciesCoreJs Condition="$(PackageJsonDependenciesCoreJs) == ''">^3.8.3</PackageJsonDependenciesCoreJs>
+    <PackageJsonDependenciesVue Condition="$(PackageJsonDependenciesVue) == ''">^3.2.13</PackageJsonDependenciesVue>
+    <PackageJsonDevdependenciesBabelCore Condition="$(PackageJsonDevdependenciesBabelCore) == ''">^7.12.16</PackageJsonDevdependenciesBabelCore>
+    <PackageJsonDevdependenciesBabelEslintParser Condition="$(PackageJsonDevdependenciesBabelEslintParser) == ''">^7.12.16</PackageJsonDevdependenciesBabelEslintParser>
+    <PackageJsonDevdependenciesVueCliPluginBabel Condition="$(PackageJsonDevdependenciesVueCliPluginBabel) == ''">~5.0.0</PackageJsonDevdependenciesVueCliPluginBabel>
+    <PackageJsonDevdependenciesVueCliPluginEslint Condition="$(PackageJsonDevdependenciesVueCliPluginEslint) == ''">~5.0.0</PackageJsonDevdependenciesVueCliPluginEslint>
+    <PackageJsonDevdependenciesVueCliService Condition="$(PackageJsonDevdependenciesVueCliService) == ''">~5.0.0</PackageJsonDevdependenciesVueCliService>
+    <PackageJsonDevdependenciesEslint Condition="$(PackageJsonDevdependenciesEslint) == ''">^7.32.0</PackageJsonDevdependenciesEslint>
+    <PackageJsonDevdependenciesEslintPluginVue Condition="$(PackageJsonDevdependenciesEslintPluginVue) == ''">^8.0.3</PackageJsonDevdependenciesEslintPluginVue>
+    <PackageJsonEslintconfigRoot Condition="$(PackageJsonEslintconfigRoot) == ''">true</PackageJsonEslintconfigRoot>
+    <PackageJsonEslintconfigEnvNode Condition="$(PackageJsonEslintconfigEnvNode) == ''">true</PackageJsonEslintconfigEnvNode>
+    <PackageJsonEslintconfigExtends Condition="$(PackageJsonEslintconfigExtends) == ''">[
+  "plugin:vue/vue3-essential",
+  "eslint:recommended"
+]</PackageJsonEslintconfigExtends>
+    <PackageJsonEslintconfigParseroptionsParser Condition="$(PackageJsonEslintconfigParseroptionsParser) == ''">@babel/eslint-parser</PackageJsonEslintconfigParseroptionsParser>
+    <PackageJsonBrowserslist Condition="$(PackageJsonBrowserslist) == ''">[
+  "\u003E 1%",
+  "last 2 versions",
+  "not dead",
+  "not ie 11"
+]</PackageJsonBrowserslist>
+  </PropertyGroup>
+</Project>
