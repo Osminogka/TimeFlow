@@ -12,3 +12,4 @@ E:\Programming\Server\TimeFlow\Backend\TimeFlow.DAL\obj\Debug\net8.0\refint\Time
 E:\Programming\Server\TimeFlow\Backend\TimeFlow.DAL\obj\Debug\net8.0\TimeFlow.DAL.pdb
 E:\Programming\Server\TimeFlow\Backend\TimeFlow.DAL\obj\Debug\net8.0\TimeFlow.DAL.genruntimeconfig.cache
 E:\Programming\Server\TimeFlow\Backend\TimeFlow.DAL\obj\Debug\net8.0\ref\TimeFlow.DAL.dll
+E:\Programming\Server\TimeFlow\Backend\TimeFlow.DAL\obj\Debug\net8.0\TimeFlow.DAL.sourcelink.json

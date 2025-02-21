@@ -4,10 +4,12 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using TimeFlow.API.Infrastructure;
 using TimeFlow.DAL.Contexts;
 using TimeFlow.DAL.Models;
 using TimeFlow.DL.Repositories;
 using TimeFlow.DL.Services;
+using static System.Formats.Asn1.AsnWriter;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,11 +19,29 @@ builder.Logging.AddConsole();
 builder.Services.AddTransient<IAccountRepository, AccountRepository>();
 builder.Services.AddTransient<IAccountService, AccountService>();
 
+//Repositories
+builder.Services.AddTransient<IBaseRepository<User>, BaseRepository<User>>();
+builder.Services.AddTransient<IBaseRepository<Transaction>, BaseRepository<Transaction>>();
+builder.Services.AddTransient<IBaseRepository<Category>, BaseRepository<Category>>();
+builder.Services.AddTransient<IBaseRepository<FriendRequest>, BaseRepository<FriendRequest>>();
+
+//Services
+builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<ITransactionService, TransactionService>();
+builder.Services.AddTransient<ICategoryService, CategoryService>();
+builder.Services.AddTransient<IFriendRequestService, FriendRequestService>();
+
+//Automapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-var connectionString = builder.Configuration.GetConnectionString("AccountConnectionString")
+var connectionStringAccounts = builder.Configuration.GetConnectionString("AccountConnectionString")
                     ?? throw new InvalidOperationException("Connection string 'AccountConnectionString' not found.");
-builder.Services.AddDbContext<IdentityContext>(options => options.UseSqlServer(connectionString,
+builder.Services.AddDbContext<IdentityContext>(options => options.UseSqlServer(connectionStringAccounts,
+    b => b.MigrationsAssembly("TimeFlow.API")));
+
+var connectionStringData = builder.Configuration.GetConnectionString("DataConnectionString")
+                    ?? throw new InvalidOperationException("Connection string 'DataConnectionString' not found.");
+builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(connectionStringData,
     b => b.MigrationsAssembly("TimeFlow.API")));
 
 builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<IdentityContext>();
@@ -69,7 +89,8 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
 app.UseDefaultFiles();
+
+await PrepDb.PrepDatabase(app);
 
 app.Run();

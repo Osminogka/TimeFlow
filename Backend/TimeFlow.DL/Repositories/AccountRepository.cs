@@ -9,12 +9,14 @@ namespace TimeFlow.DL.Repositories
         private readonly UserManager<AppUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly IBaseRepository<User> _userRepository;
 
-        public AccountRepository(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, SignInManager<AppUser> signInManager)
+        public AccountRepository(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, SignInManager<AppUser> signInManager, IBaseRepository<User> userRepository)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _signInManager = signInManager;
+            _userRepository = userRepository;
         }
 
         public IQueryable<AppUser> Get() => _userManager.Users;
@@ -25,7 +27,14 @@ namespace TimeFlow.DL.Repositories
         {
             var result = await _userManager.CreateAsync(user, password);
             if (result.Succeeded)
-                return result;
+            {
+                User baseUser = new User
+                {
+                    Username = user.UserName,
+                    Email = user.Email
+                };
+                await _userRepository.AddAsync(baseUser);
+            }
             return IdentityResult.Failed();
         }
 
