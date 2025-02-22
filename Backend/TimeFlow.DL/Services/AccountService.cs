@@ -16,11 +16,13 @@ namespace TimeFlow.DL.Services
     public class AccountService : IAccountService
     {
         private readonly IAccountRepository _accountRepository;
+        private readonly IBaseRepository<User> _userRepository;
         private readonly IConfiguration _configuration;
 
-        public AccountService(IAccountRepository accountRepository, IConfiguration configuration)
+        public AccountService(IAccountRepository accountRepository, IBaseRepository<User> userRepository, IConfiguration configuration)
         {
             _accountRepository = accountRepository;
+            _userRepository = userRepository;
             _configuration = configuration;
         }
 
@@ -75,6 +77,14 @@ namespace TimeFlow.DL.Services
 
             if (result.Succeeded)
             {
+                User applicationUser = new User
+                {
+                    Username = user.UserName,
+                    Email = user.Email,
+                    isPublic = false
+                };
+                await _userRepository.AddAsync(applicationUser);
+
                 response.Success = true;
                 response.Message = await TokenGenerator(user);
                 return response;

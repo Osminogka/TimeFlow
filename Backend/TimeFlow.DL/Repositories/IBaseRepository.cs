@@ -10,6 +10,7 @@ namespace TimeFlow.DL.Repositories
         Task<IEnumerable<T>> GetAllAsync();
         Task<T?> GetByIdAsync(long id);
         IQueryable<T> Where(Expression<Func<T, bool>> exp);
+        bool Any(Expression<Func<T, bool>> predicate);
         Task<T?> SingleOrDefaultAsync(System.Linq.Expressions.Expression<Func<T, bool>> exp);
         Task<int> AddAsync(T entity);
         Task<int> UpdateAsync(T entity);

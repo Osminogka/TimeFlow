@@ -113,16 +113,14 @@ namespace TimeFlow.API.Migrations.Data
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("UserId")
-                        .HasColumnType("bigint");
-
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.Property<bool>("isPublic")
+                        .HasColumnType("bit");
 
-                    b.HasIndex("UserId");
+                    b.HasKey("Id");
 
                     b.ToTable("Users");
                 });
@@ -165,13 +163,6 @@ namespace TimeFlow.API.Migrations.Data
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("TimeFlow.DAL.Models.User", b =>
-                {
-                    b.HasOne("TimeFlow.DAL.Models.User", null)
-                        .WithMany("Friends")
-                        .HasForeignKey("UserId");
-                });
-
             modelBuilder.Entity("TimeFlow.DAL.Models.Category", b =>
                 {
                     b.Navigation("Transactions");
@@ -179,8 +170,6 @@ namespace TimeFlow.API.Migrations.Data
 
             modelBuilder.Entity("TimeFlow.DAL.Models.User", b =>
                 {
-                    b.Navigation("Friends");
-
                     b.Navigation("ReceivedRequests");
 
                     b.Navigation("SentRequests");

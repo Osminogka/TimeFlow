@@ -1,5 +1,4 @@
-﻿using Azure.Core;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using TimeFlow.DAL.Models;
 using TimeFlow.DAL.SideModels;
 using TimeFlow.DL.Repositories;
@@ -28,9 +27,29 @@ namespace TimeFlow.DL.Services
                 return response;
             }
 
-            var requests = await _friendRequestsRepository.Where(obj => obj.ReceiverId == user.Id).Include(obj => obj.Sender).ToListAsync();
+            var requests = await _friendRequestsRepository.Where(obj => obj.ReceiverId == user.Id && !obj.IsAccepted).Include(obj => obj.Sender).ToListAsync();
             foreach (FriendRequest request in requests)
-                response.Enum.Append(request.Sender.Username);
+                response.Enum.Add(request.Sender.Username);
+
+            response.Success = true;
+            response.Message = "Got all your friend requests";
+            return response;
+        }
+
+        public async Task<ResponseList<string>> GetFriendsListAsync(string userEmail)
+        {
+            ResponseList<string> response = new ResponseList<string>();
+
+            var user = await _userRepository.SingleOrDefaultAsync(obj => obj.Email == userEmail);
+            if (user == null)
+            {
+                response.Message = "Such user doesn't exist";
+                return response;
+            }
+
+            var requests = await _friendRequestsRepository.Where(obj => (obj.ReceiverId == user.Id || obj.SenderId == user.Id) && obj.IsAccepted).Include(obj => obj.Sender).Include(obj => obj.Receiver).ToListAsync();
+            foreach (FriendRequest request in requests)
+                response.Enum.Add(request.SenderId == user.Id ? request.Receiver.Username : request.Sender.Username);
 
             response.Success = true;
             response.Message = "Got all your friend requests";
@@ -54,7 +73,15 @@ namespace TimeFlow.DL.Services
                 return response;
             }
 
-            var entryExist = await _friendRequestsRepository.SingleOrDefaultAsync(obj => obj.SenderId == user.Id && obj.ReceiverId == receiver.Id);
+            var alreadyFriends = await _friendRequestsRepository.SingleOrDefaultAsync(obj => ((obj.ReceiverId == user.Id && obj.SenderId == receiver.Id)
+                || (obj.ReceiverId == receiver.Id && obj.SenderId == user.Id))
+                && obj.IsAccepted == true);
+            if(alreadyFriends != null)
+            {
+                response.Message = "You are already friends with this user";
+            }
+
+            var entryExist = await _friendRequestsRepository.SingleOrDefaultAsync(obj => obj.SenderId == user.Id && obj.ReceiverId == receiver.Id && !obj.IsAccepted);
             if(entryExist != null)
             {
                 response.Success = true;
@@ -93,7 +120,7 @@ namespace TimeFlow.DL.Services
                 return response;
             }
 
-            var entryExist = await _friendRequestsRepository.SingleOrDefaultAsync(obj => obj.SenderId == user.Id && obj.ReceiverId == sender.Id);
+            var entryExist = await _friendRequestsRepository.SingleOrDefaultAsync(obj => obj.ReceiverId == user.Id && obj.SenderId == sender.Id && !obj.IsAccepted);
             if (entryExist == null)
             {
                 response.Message = "Friend request does not exist";
@@ -124,7 +151,7 @@ namespace TimeFlow.DL.Services
                 return response;
             }
 
-            var entryExist = await _friendRequestsRepository.SingleOrDefaultAsync(obj => obj.SenderId == user.Id && obj.ReceiverId == sender.Id);
+            var entryExist = await _friendRequestsRepository.SingleOrDefaultAsync(obj => obj.ReceiverId == user.Id && obj.SenderId == sender.Id && !obj.IsAccepted);
             if (entryExist == null)
             {
                 response.Message = "Friend request does not exist";

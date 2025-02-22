@@ -16,6 +16,7 @@ namespace Authentication.Tests
     public class AuthenticationControllerTests
     {
         private Mock<IAccountRepository> Repository { get; set; }
+        private Mock<IBaseRepository<User>> UserRepository { get; set; }
 
         private AuthenticationController Controller { get; set; }
 
@@ -38,6 +39,16 @@ namespace Authentication.Tests
                 new IdentityRole("Student")
             }.AsQueryable();
 
+            var baseUsers = new List<User>
+            {
+                new User
+                {
+                    Username = "test",
+                    Email = "test@gmail.com",
+                    isPublic = false
+                }
+            };
+
             var claims = new List<Claim>()
             {
                 new Claim("University", "DKU"),
@@ -50,6 +61,7 @@ namespace Authentication.Tests
             };
 
             Repository = new Mock<IAccountRepository>();
+            UserRepository = new Mock<IBaseRepository<User>>();
 
             Repository.Setup(x => x.GetByEmailAsync(It.IsAny<string>()))
                 .ReturnsAsync((string email) => users.SingleOrDefault(obj => obj.Email == email));
@@ -61,7 +73,11 @@ namespace Authentication.Tests
                 .ReturnsAsync(IdentityResult.Success)
                 .Callback<AppUser, string>((x, y) => users.Add(x));
 
-            var authService = new AccountService(Repository.Object, GetTestConfiguration());
+            UserRepository.Setup(x => x.AddAsync(It.IsAny<User>()))
+                .ReturnsAsync(1)
+                .Callback<User>((x) => baseUsers.Add(x));
+
+            var authService = new AccountService(Repository.Object, UserRepository.Object, GetTestConfiguration());
             var logger = new Mock<ILogger<AuthenticationController>>();
 
             var config = new MapperConfiguration(cfg =>
@@ -92,7 +108,7 @@ namespace Authentication.Tests
             var okResult = Assert.IsType<OkObjectResult>(result);
             var response = Assert.IsType<ResponseMessage>(okResult.Value);
 
-            Assert.Equal(true, response.Success);
+            Assert.True(response.Success);
         }
 
         [Fact]

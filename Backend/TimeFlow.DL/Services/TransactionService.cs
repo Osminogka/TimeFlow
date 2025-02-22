@@ -51,14 +51,16 @@ namespace TimeFlow.DL.Services
                 UserId = user.Id,
                 Description = createTransactionDto.Description,
             };
-            await _transactionRepository.AddAsync(transaction);
+            var result = await _transactionRepository.AddAsync(transaction);
+            if (result != 1)
+                return response;
 
             response.Success = true;
             response.Message = "Transaction successfully created";
             return response;
         }
 
-        public async Task<ResponseList<ReadTransactionDto>> GetTransactionsForSelf(string userEmail, int month)
+        public async Task<ResponseList<ReadTransactionDto>> GetTransactionsForSelfAsync(string userEmail, int month, int year)
         {
             ResponseList<ReadTransactionDto> response = new ResponseList<ReadTransactionDto>();
 
@@ -69,7 +71,7 @@ namespace TimeFlow.DL.Services
                 return response;
             }
 
-            var transactions = await _transactionRepository.Where(obj => obj.Id == user.Id && obj.Date.Month == month).ToListAsync();
+            var transactions = await _transactionRepository.Where(obj => obj.UserId == user.Id && obj.Date.Month == month && obj.Date.Year == year).ToListAsync();
             var categories = await _categoryRepository.GetAllAsync();
 
             foreach(Transaction transaction in transactions)
@@ -77,11 +79,11 @@ namespace TimeFlow.DL.Services
                 ReadTransactionDto readTransactionDto = new ReadTransactionDto
                 {
                     Amount = transaction.Amount,
-                    Category = categories.SingleOrDefault(obj => obj.Id == transaction.Id)!.Name,
+                    Category = categories.SingleOrDefault(obj => obj.Id == transaction.CategoryId)?.Name ?? "Unknown",
                     Date = transaction.Date,
                     Description = transaction.Description
                 };
-                response.Enum.Append(readTransactionDto);
+                response.Enum.Add(readTransactionDto);
             }
 
             response.Success = true;
@@ -89,7 +91,7 @@ namespace TimeFlow.DL.Services
             return response;
         }
 
-        public async Task<ResponseList<ReadFriendTransactionDto>> GetTransactionsForFriend(string userEmail, string friendUsername, int month)
+        public async Task<ResponseList<ReadFriendTransactionDto>> GetTransactionsForFriendAsync(string userEmail, string friendUsername, int month, int year)
         {
             ResponseList<ReadFriendTransactionDto> response = new ResponseList<ReadFriendTransactionDto>();
 
@@ -116,7 +118,7 @@ namespace TimeFlow.DL.Services
                 return response;
             }
 
-            var transactions = await _transactionRepository.Where(obj => obj.Id == friend.Id && obj.Date.Month == month).ToListAsync();
+            var transactions = await _transactionRepository.Where(obj => obj.UserId == friend.Id && obj.Date.Month == month && obj.Date.Year == year).ToListAsync();
             var categories = await _categoryRepository.GetAllAsync();
 
             foreach (Transaction transaction in transactions)
@@ -127,7 +129,7 @@ namespace TimeFlow.DL.Services
                     Category = categories.SingleOrDefault(obj => obj.Id == transaction.Id)!.Name,
                     Date = transaction.Date
                 };
-                response.Enum.Append(readTransactionDto);
+                response.Enum.Add(readTransactionDto);
             }
 
             response.Success = true;

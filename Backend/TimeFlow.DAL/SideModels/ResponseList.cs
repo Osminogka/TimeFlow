@@ -11,6 +11,6 @@ namespace TimeFlow.DAL.SideModels
         public bool Success { get; set; } = false;
         public string Message { get; set; } = "Error occured";
 
-        public IEnumerable<T> Enum { get; set; } = new List<T>();
+        public List<T> Enum { get; set; } = new List<T>();
     }
 }

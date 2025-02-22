@@ -12,7 +12,7 @@ namespace TimeFlow.DL.Services
     public interface ITransactionService
     {
         Task<ResponseMessage> CreateTransactionAsync(CreateTransactionDto createTransactionDto, string userEmail);
-        Task<ResponseList<ReadTransactionDto>> GetTransactionsForSelf(string userEmail, int month);
-        Task<ResponseList<ReadFriendTransactionDto>> GetTransactionsForFriend(string userEmail, string friendUsername, int month);
+        Task<ResponseList<ReadTransactionDto>> GetTransactionsForSelfAsync(string userEmail, int month, int year);
+        Task<ResponseList<ReadFriendTransactionDto>> GetTransactionsForFriendAsync(string userEmail, string friendUsername, int month, int year);
     }
 }
