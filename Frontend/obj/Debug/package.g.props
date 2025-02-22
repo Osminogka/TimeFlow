@@ -9,6 +9,7 @@
     <PackageJsonScriptsLint Condition="$(PackageJsonScriptsLint) == ''">vue-cli-service lint</PackageJsonScriptsLint>
     <PackageJsonDependenciesCoreJs Condition="$(PackageJsonDependenciesCoreJs) == ''">^3.8.3</PackageJsonDependenciesCoreJs>
     <PackageJsonDependenciesVue Condition="$(PackageJsonDependenciesVue) == ''">^3.2.13</PackageJsonDependenciesVue>
+    <PackageJsonDependenciesVueRouter Condition="$(PackageJsonDependenciesVueRouter) == ''">^4.5.0</PackageJsonDependenciesVueRouter>
     <PackageJsonDevdependenciesBabelCore Condition="$(PackageJsonDevdependenciesBabelCore) == ''">^7.12.16</PackageJsonDevdependenciesBabelCore>
     <PackageJsonDevdependenciesBabelEslintParser Condition="$(PackageJsonDevdependenciesBabelEslintParser) == ''">^7.12.16</PackageJsonDevdependenciesBabelEslintParser>
     <PackageJsonDevdependenciesVueCliPluginBabel Condition="$(PackageJsonDevdependenciesVueCliPluginBabel) == ''">~5.0.0</PackageJsonDevdependenciesVueCliPluginBabel>

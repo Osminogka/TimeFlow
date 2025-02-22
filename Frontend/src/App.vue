@@ -1,26 +1,18 @@
-<template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
-</template>
+<script setup>
+//#dcaaf4 #4437a3 #fe79cc #ffdd6b
+import Dashboard from './components/MainDashboard.vue';
+import GreetingPage from './components/GreetingPage.vue';
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+import authApi from '@/services/utils';
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<template>
+  <div v-if="!authApi.isAuthenticated()">
+    <GreetingPage />
+  </div>
+  <div v-else>
+    <Dashboard />
+  </div>
+  <p>{{ errorMessage }}</p>
+</template>
