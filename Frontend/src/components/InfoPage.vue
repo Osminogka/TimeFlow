@@ -13,15 +13,25 @@
             </p>
         </div>
         <div class="info-block">
-            <h2>🚀 Why Choose [Your App Name]?</h2>
-            <p> 
-                ✅ Easy-to-Use: Simple and intuitive design
-                ✅ Detailed Analytics: Visualize your spending trends
-                ✅ Social Features: Connect with friends and stay motivated
-                ✅ Privacy First: Choose what you share and with whom
-
-                🔹 Ready to get started? Sign up now and take control of your finances!
-            </p>
+            <h2>🚀 Why Choose TimeFlow?</h2>
+            <p>✅ Easy-to-Use: Simple and intuitive design </p>
+            <p>✅ Detailed Analytics: Visualize your spending trends</p>
+            <p>✅ Social Features: Connect with friends and stay motivated</p>
+            <p>✅ Privacy First: Choose what you share and with whom</p>
+            <p>🔹 Ready to get started? Sign up now and take control of your finances!</p> 
         </div>
     </div>
 </template>
+
+<style scoped>
+
+.info-block {
+    width: 80%;
+    padding: 1rem;
+    margin: 1rem;
+    border: 1px solid #4437a3;
+    border-radius: 5px;
+    background-color: #fc92d3;
+}
+
+</style>

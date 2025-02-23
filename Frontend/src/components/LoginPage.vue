@@ -1,16 +1,132 @@
 <script setup>
+import auth from '@/services/api/auth';
+
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+
+const email = ref('');
+const password = ref('');
+const errorMessage = ref('');
+
+const router = useRouter();
+
+async function handleLogin() {
+    try {
+        let result = await auth.login(email.value, password.value);
+        if (result.success) {
+            router.push('/');
+        } else {
+            errorMessage.value = result.message;
+        }
+    } catch (error) {
+        errorMessage.value = error.message;
+    }
+}
+
+function verifyLogin() {
+    errorMessage.value = '';
+
+    if (email.value === '' || password.value === '') {
+        errorMessage.value = 'Please fill in all fields';
+    } else if (password.value.length < 8) {
+        errorMessage.value = 'Password must be at least 8 characters';
+    } else if (!email.value.includes('@') || !email.value.includes('.')) {
+        errorMessage.value = 'Invalid email address';
+    }
+
+    if (errorMessage.value === '') {
+        handleLogin();
+    }
+}
 
 </script>
 
 <template>
-    <div>
+    <div class="register-form">
         <h1>Login</h1>
-        <form @submit.prevent="login">
-        <label for="username">Username:</label>
-        <input type="text" id="username" v-model="username" required>
-        <label for="password">Password:</label>
-        <input type="password" id="password" v-model="password" required>
-        <button type="submit">Login</button>
+        <form @submit.prevent="register">
+            <input class="input-field" type="email" id="email" v-model="email" placeholder="Email" required>
+            <input class="input-field" type="password" id="password" v-model="password" placeholder="Password" required>
+            <button class="submit-button" type="submit" @click.prevent="verifyLogin()">Login</button>
         </form>
+        <p class="error-message">{{ errorMessage }}</p>
     </div>
 </template>
+
+<style scoped>
+
+.register-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    padding: 1rem;
+    margin: 1rem;
+    border: 1px solid #4437a3;
+    border-radius: 5px;
+    background-color: #fc92d3;
+}
+
+h1 {
+    color: #cf1487;
+}
+
+.register-form form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.input-field{
+    margin: 0.2rem;
+    padding: 0.2rem;
+    border-radius: 5px;
+    border: 1px solid black;
+    width: 80%;
+    background-color: #dcaaf4;
+}
+
+.input-field:focus{
+    outline: none;
+}
+
+.submit-button{
+    display: block;
+    cursor: pointer;
+    border: 1px solid black;
+    padding: 0.3rem;
+    border-radius: 5px;
+    background-color: #ffdd6b;
+    color: black;
+    text-wrap: bold;
+    text-decoration: none;
+    margin-top: 0.5rem;
+    width: 40%;
+}
+
+.button-redirect {
+    margin-top: 0.5rem;
+    text-decoration: none;
+}
+
+.error-message {
+    color: red;
+}
+
+@media (min-width: 768px) {
+    .register-form{
+        width: 40%;
+    }
+
+    .submit-button{
+        width: 20%;
+    }
+
+    .input-field{
+        width: 30%;
+    }
+}
+
+</style>

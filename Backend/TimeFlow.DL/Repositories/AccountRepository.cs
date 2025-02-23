@@ -34,6 +34,8 @@ namespace TimeFlow.DL.Repositories
                     Email = user.Email
                 };
                 await _userRepository.AddAsync(baseUser);
+
+                return result;
             }
             return IdentityResult.Failed();
         }

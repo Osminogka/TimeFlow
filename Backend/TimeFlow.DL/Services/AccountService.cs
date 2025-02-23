@@ -77,14 +77,6 @@ namespace TimeFlow.DL.Services
 
             if (result.Succeeded)
             {
-                User applicationUser = new User
-                {
-                    Username = user.UserName,
-                    Email = user.Email,
-                    isPublic = false
-                };
-                await _userRepository.AddAsync(applicationUser);
-
                 response.Success = true;
                 response.Message = await TokenGenerator(user);
                 return response;

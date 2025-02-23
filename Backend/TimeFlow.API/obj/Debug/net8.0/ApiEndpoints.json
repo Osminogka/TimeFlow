@@ -2,7 +2,7 @@
   {
     "ContainingType": "TimeFlow.API.Controllers.AuthenticationController",
     "Method": "LoginAsync",
-    "RelativePath": "api/a/Authentication/login",
+    "RelativePath": "api/authentication/login",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -18,7 +18,7 @@
   {
     "ContainingType": "TimeFlow.API.Controllers.AuthenticationController",
     "Method": "RegisterAsync",
-    "RelativePath": "api/a/Authentication/register",
+    "RelativePath": "api/authentication/register",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -29,6 +29,163 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TimeFlow.API.Controllers.FriendsController",
+    "Method": "AcceptFriendRequestAsync",
+    "RelativePath": "api/friends/accept/{senderName}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "senderName",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TimeFlow.API.Controllers.FriendsController",
+    "Method": "GetFriendsListAsync",
+    "RelativePath": "api/friends/list",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TimeFlow.API.Controllers.FriendsController",
+    "Method": "RejectFriendRequestAsync",
+    "RelativePath": "api/friends/reject/{senderName}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "senderName",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TimeFlow.API.Controllers.FriendsController",
+    "Method": "GetFriendRequestsAsync",
+    "RelativePath": "api/friends/requests",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TimeFlow.API.Controllers.FriendsController",
+    "Method": "SendFriendRequestAsync",
+    "RelativePath": "api/friends/send/{receiverName}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "receiverName",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TimeFlow.API.Controllers.TransactionsController",
+    "Method": "CreateTransactionAsync",
+    "RelativePath": "api/transactions/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "transaction",
+        "Type": "TimeFlow.DAL.Dtos.CreateTransactionDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TimeFlow.API.Controllers.TransactionsController",
+    "Method": "GetTransactionsForFriendAsync",
+    "RelativePath": "api/transactions/friend/{friendName}/{month}/{year}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "friendName",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "month",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "year",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TimeFlow.API.Controllers.TransactionsController",
+    "Method": "GetTransactionsForSelfAsync",
+    "RelativePath": "api/transactions/self/{month}/{year}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "month",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "year",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TimeFlow.API.Controllers.UsersController",
+    "Method": "GetAllUsersAsync",
+    "RelativePath": "api/user/get/{page}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TimeFlow.API.Controllers.UsersController",
+    "Method": "ChangeAccountVisibilityAsync",
+    "RelativePath": "api/user/visibility",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   }
 ]

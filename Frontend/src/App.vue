@@ -1,5 +1,5 @@
 <script setup>
-//#dcaaf4 #4437a3 #fe79cc #ffdd6b
+//#4437a3 #dcaaf4 #fc92d3 #ffdd6b
 import Dashboard from './components/MainDashboard.vue';
 import GreetingPage from './components/GreetingPage.vue';
 

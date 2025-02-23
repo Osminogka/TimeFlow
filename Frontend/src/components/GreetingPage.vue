@@ -48,36 +48,48 @@ header {
 .button-redirect {
     cursor: pointer;
     border: 1px solid black;
-    padding: 0.2rem;
+    padding: 0.3rem;
     border-radius: 5px;
-    background-color: #ffdd6b;
-    color: black;
-    text-wrap: bold;
+    background: linear-gradient(90deg, #ff007f, #ff5e62);
+    font-weight: bold;
     text-decoration: none;
+    transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+    display: inline-block;
+    text-align: center;
+}
+
+.button-redirect:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
 }
 
 .button-redirect:visited {
     color: black;
 }
 
-.header-text{
+.header-text {
     cursor: pointer;
-    color: #fe79cc;
+    font-size: 2rem;
+    font-weight: bold;
+    background: linear-gradient(90deg, #ff007f, #ff5e62);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+}
+
+.header-text:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
 }
 
 .block {
     padding: auto;
-    width: 90%;
+    width: 100%;
     display: flex;
     flex-direction: column;
-}
-
-.info-block {
-    width: 80%;
-    padding: 1rem;
-    margin: 1rem;
-    border: 1px solid #4437a3;
-    border-radius: 5px;
-    background-color: #dcaaf4;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
 }
 </style>

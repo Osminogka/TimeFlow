@@ -6,7 +6,7 @@ using TimeFlow.DL.Services;
 
 namespace TimeFlow.API.Controllers
 {
-    [Route("api/a/[controller]/")]
+    [Route("api/authentication")]
     public class AuthenticationController : BaseController
     {
         private readonly IAccountService _authService;
@@ -31,8 +31,6 @@ namespace TimeFlow.API.Controllers
                 if (!ModelState.IsValid)
                     return BadRequest("Invalid credentials");
                 var result = await _authService.LoginAsync(model);
-                if (!result.Success)
-                    return BadRequest(result.Message);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -50,16 +48,7 @@ namespace TimeFlow.API.Controllers
                 if (!ModelState.IsValid)
                     return BadRequest("Invalid credentials");
                 var result = await _authService.RegisterAsync(model);
-                if (!result.Success)
-                    return BadRequest(result.Message);
-
-                ResponseMessage response = new ResponseMessage()
-                {
-                    Success = result.Success,
-                    Message = result.Message
-                };
-
-                return Ok(response);
+                return Ok(result);
             }
             catch (Exception ex)
             {
