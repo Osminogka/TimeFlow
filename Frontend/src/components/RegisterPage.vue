@@ -46,35 +46,46 @@ function verifyLogin() {
 
 <template>
     <div class="register-form">
-        <h1>Register</h1>
+        <h1>🔐 Register</h1>
         <form @submit.prevent="register">
             <input class="input-field" type="text" id="username" v-model="username" placeholder="Username" required>
             <input class="input-field" type="email" id="email" v-model="email" placeholder="Email" required>
             <input class="input-field" type="password" id="password" v-model="password" placeholder="Password" required>
-            <button class="submit-button" type="submit" @click.prevent="verifyLogin()">Register</button>
+            <button class="submit-button" type="submit" @click.prevent="verifyLogin()">Login</button>
         </form>
-        <p class="error-message">{{ errorMessage }}</p>
+        <p class="error-message" v-if="errorMessage">{{ errorMessage }}</p>
         <router-link class="button-redirect" :to="{ name: 'Login' }">Already have an account? Login here!</router-link>
     </div>
 </template>
 
 <style scoped>
 
-.register-form{
+.register-form {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 80%;
-    padding: 1rem;
-    margin: 1rem;
-    border: 1px solid #4437a3;
-    border-radius: 5px;
-    background-color: #fc92d3;
+    width: 90%;
+    max-width: 400px;
+    padding: 0.5rem;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #fc92d3, #f373b9);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8px);
+    text-align: center;
+    color: #fff;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.register-form:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 }
 
 h1 {
-    color: #cf1487;
+    color: #fff;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
 }
 
 .register-form form {
@@ -84,55 +95,57 @@ h1 {
     width: 100%;
 }
 
-.input-field{
-    margin: 0.2rem;
-    padding: 0.2rem;
-    border-radius: 5px;
-    border: 1px solid black;
-    width: 80%;
-    background-color: #dcaaf4;
-}
-
-.input-field:focus{
+.input-field {
+    width: 90%;
+    max-width: 300px;
+    margin: 0.5rem 0;
+    padding: 0.7rem;
+    border-radius: 8px;
+    border: none;
     outline: none;
+    background-color: rgba(255, 255, 255, 0.3);
+    color: #fff;
+    font-size: 1rem;
+    transition: background 0.3s ease-in-out, transform 0.1s ease-in-out;
 }
 
-.submit-button{
-    display: block;
+.input-field::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.input-field:focus {
+    background-color: rgba(255, 255, 255, 0.5);
+    transform: scale(1.02);
+}
+
+.submit-button {
     cursor: pointer;
-    border: 1px solid black;
-    padding: 0.3rem;
-    border-radius: 5px;
+    border: none;
+    padding: 0.7rem 1.2rem;
+    border-radius: 8px;
     background-color: #ffdd6b;
     color: black;
-    text-wrap: bold;
-    text-decoration: none;
-    margin-top: 0.5rem;
-    width: 40%;
+    font-weight: bold;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    margin-top: 2rem;
+    width: 60%;
+    max-width: 200px;
+}
+
+.submit-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    background-color: #ffd43b;
+}
+
+.error-message {
+    color: #ff4d4d;
+    font-weight: bold;
+    margin-top: 0.8rem;
 }
 
 .button-redirect {
-    margin-top: 1rem;
-    text-decoration: none;
-    text-align: center;
-}
-
-.error-message{
-    color: red;
-}
-
-@media (min-width: 768px) {
-    .register-form{
-        width: 40%;
-    }
-
-    .submit-button{
-        width: 20%;
-    }
-
-    .input-field{
-        width: 30%;
-    }
+    margin-top: 1em;
 }
 
 </style>
