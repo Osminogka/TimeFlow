@@ -8,7 +8,7 @@ import authApi from '@/services/utils';
 </script>
 
 <template>
-  <div v-if="authApi.isAuthenticated()">
+  <div v-if="!authApi.isAuthenticated()">
     <GreetingPage />
   </div>
   <div v-else>

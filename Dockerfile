@@ -11,11 +11,11 @@ RUN npm run build
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
 WORKDIR /app
 
-COPY Backend/*.sln ./
-COPY Backend/TimeFlow.API/*.csproj ./TimeFlow.API/
-COPY Backend/TimeFlow.DAL/*.csproj ./TimeFlow.DAL/
-COPY Backend/TimeFlow.DL/*.csproj ./TimeFlow.DL/
-COPY Backend/TimeFlow.Tests/*.csproj ./TimeFlow.Tests/
+COPY ./Backend/*.sln ./
+COPY ./Backend/TimeFlow.API/*.csproj ./TimeFlow.API/
+COPY ./Backend/TimeFlow.DAL/*.csproj ./TimeFlow.DAL/
+COPY ./Backend/TimeFlow.DL/*.csproj ./TimeFlow.DL/
+COPY ./Backend/TimeFlow.Tests/*.csproj ./TimeFlow.Tests/
 RUN dotnet restore
 
 COPY Backend/ ./

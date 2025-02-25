@@ -90,6 +90,19 @@ app.UseAuthorization();
 
 app.MapControllers();
 app.UseDefaultFiles();
+app.UseSpaStaticFiles();
+
+app.MapWhen(x => !x.Request.Path.Value.StartsWith("/api"), builder =>
+{
+    builder.UseSpa(spa =>
+    {
+        spa.Options.SourcePath = "wwwroot";
+        if (app.Environment.IsDevelopment())
+        {
+            spa.UseProxyToSpaDevelopmentServer("http://localhost:8080/");
+        }
+    });
+});
 
 await PrepDb.PrepDatabase(app);
 
