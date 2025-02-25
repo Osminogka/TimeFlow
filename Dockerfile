@@ -4,6 +4,7 @@ COPY ./Frontend/package*.json ./
 RUN npm install
 
 COPY ./Frontend/ .
+RUN ls -la node_modules/.bin/
 RUN npm run build
 
 # Backend

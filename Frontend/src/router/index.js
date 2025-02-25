@@ -21,6 +21,15 @@ const routes = [
             requireAuth: false
         }
     },
+    {
+        path: "/addfriend",
+        name: "AddFriend",
+        component: () => import("../components/AddFriend.vue"),
+        meta:{
+            title: "Add Friend",
+            requireAuth: true
+        }
+    }
 ];
 
 const router = createRouter({

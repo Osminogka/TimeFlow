@@ -3,8 +3,9 @@ import { computed, defineProps, ref } from 'vue';
 import { Pie } from 'vue-chartjs';
 import { onClickOutside } from '@vueuse/core';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 
 const isModalOpen = ref(false);
 const modalRef = ref(null);
@@ -60,21 +61,32 @@ const chartOptions = {
     legend: { display: false },
     tooltip: {
       callbacks: {
-        label: (tooltipItem) => `${tooltipItem.label}: $${tooltipItem.raw}`
+        label: (tooltipItem) => {
+          const total = tooltipItem.dataset.data.reduce((acc, val) => acc + val, 0);
+          const value = tooltipItem.raw;
+          const percentage = ((value / total) * 100).toFixed(1);
+          return `${tooltipItem.label}: $${value} (${percentage}%)`;
+        }
       }
     },
     datalabels: {
       color: '#fff',
       font: { weight: 'bold', size: 14 },
-      formatter: (value, context) => context.chart.data.labels[context.dataIndex]
+      formatter: (value, context) => {
+        const total = context.dataset.data.reduce((acc, val) => acc + val, 0);
+        const percentage = ((value / total) * 100).toFixed(1);
+        return `${percentage}%`;
+      }
     }
   }
 };
 
 const categoryValues = computed(() => {
-  return Object.entries(chartData.value.labels).map(([index, category]) => ({
+  const total = chartData.value.datasets[0].data.reduce((acc, val) => acc + val, 0);
+  return chartData.value.labels.map((category, index) => ({
     category,
     value: chartData.value.datasets[0].data[index],
+    percentage: ((chartData.value.datasets[0].data[index] / total) * 100).toFixed(1),
     color: chartData.value.datasets[0].backgroundColor[index]
   }));
 });
@@ -82,8 +94,9 @@ const categoryValues = computed(() => {
 
 <template>
   <div class="chart-container">
-    <Pie :data="chartData" :options="chartOptions" />
-    
+    <div class="pie-container">
+      <Pie :data="chartData" :options="chartOptions" />
+    </div>
     <ul class="legend">
       <li v-for="(item, index) in categoryValues" :key="index">
         <div>
@@ -244,7 +257,6 @@ const categoryValues = computed(() => {
   opacity: 0.9;
 }
 
-
 /* Animations */
 
 .fade-enter-active, .fade-leave-active {
@@ -265,6 +277,20 @@ const categoryValues = computed(() => {
 @media (min-width: 768px) {
   .modal-content {
     width: 30%;
+  }
+
+  .chart-container{
+    display: flex;
+    flex-direction: row;
+    gap: 10rem;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .pie-container{
+    width:30%;
+    height:auto;
   }
 }
 </style>

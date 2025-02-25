@@ -30,7 +30,6 @@ const chageVisisbility = async () => {
 }
   
 export default {
-    createTransaction,
-    getSelfTransaction,
-    getFriendTransaction
+    getUsers,
+    chageVisisbility,
 };

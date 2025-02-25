@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -9,8 +8,7 @@ using TimeFlow.DAL.Contexts;
 using TimeFlow.DAL.Models;
 using TimeFlow.DL.Repositories;
 using TimeFlow.DL.Services;
-using static System.Formats.Asn1.AsnWriter;
-
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Logging.ClearProviders();
@@ -81,6 +79,11 @@ builder.Services.AddAuthorization();
 
 builder.Services.AddControllers();
 
+builder.Services.AddSpaStaticFiles(configuration =>
+{
+    configuration.RootPath = "wwwroot";
+});
+
 var app = builder.Build();
 
 app.UseRouting();
@@ -90,6 +93,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 app.UseDefaultFiles();
+
 app.UseSpaStaticFiles();
 
 app.MapWhen(x => !x.Request.Path.Value.StartsWith("/api"), builder =>

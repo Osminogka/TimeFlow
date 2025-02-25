@@ -192,3 +192,6 @@ E:\Programming\Server\TimeFlow\Backend\TimeFlow.Tests\bin\Debug\net8.0\runtimes\
 E:\Programming\Server\TimeFlow\Backend\TimeFlow.Tests\bin\Debug\net8.0\runtimes\win-arm64\native\e_sqlite3.dll
 E:\Programming\Server\TimeFlow\Backend\TimeFlow.Tests\bin\Debug\net8.0\runtimes\win-x64\native\e_sqlite3.dll
 E:\Programming\Server\TimeFlow\Backend\TimeFlow.Tests\bin\Debug\net8.0\runtimes\win-x86\native\e_sqlite3.dll
+E:\Programming\Server\TimeFlow\Backend\TimeFlow.Tests\bin\Debug\net8.0\Microsoft.AspNetCore.NodeServices.dll
+E:\Programming\Server\TimeFlow\Backend\TimeFlow.Tests\bin\Debug\net8.0\Microsoft.AspNetCore.SpaServices.dll
+E:\Programming\Server\TimeFlow\Backend\TimeFlow.Tests\bin\Debug\net8.0\Microsoft.AspNetCore.SpaServices.Extensions.dll

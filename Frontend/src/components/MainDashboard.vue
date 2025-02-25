@@ -5,12 +5,13 @@ import authApi from '@/services/utils';
 import transaction from '@/services/api/transaction';
 
 import { ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 
 import { onClickOutside } from '@vueuse/core';
 
 const transactions = ref(transaction.test_transactions);
 const router = useRouter();
+const route = useRoute();
 const menuOpen = ref(false);
 const menuRef = ref(null);
 
@@ -20,7 +21,7 @@ function logout() {
 }
 
 function goToFriends() {
-    router.push({ name: 'Friends' });
+    router.push('/addfriend');
 }
 
 function goToProfile() {
@@ -51,11 +52,13 @@ onClickOutside(menuRef, () => {
         </div>
     </header>
 
-    <main class="dashboard-container">   
-        <div class="chart-container">
-            <PieChart :transactions="transactions" />
-        </div>
-    </main>
+    <router-view class="dashboard-container">
+        <component 
+            :is="route.path === '/' ? PieChart : route.matched[0]?.components.default" 
+            v-bind="route.path === '/' ? { transactions: transactions } : {}" 
+        />
+    </router-view>
+
 </template>
 
 <style scoped>
