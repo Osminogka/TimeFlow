@@ -20,7 +20,7 @@ async function friendRequest(){
 <template>
     <div class="social-entity-container">
         <p class="name-display">{{ name }}</p>
-        <button v-if="type === 'friend'" @click="friendRequest" class="invite-friend-button custom-button"></button>
+        <button @click="friendRequest" class="invite-friend-button custom-button"></button>
     </div>
 </template>
 
@@ -44,7 +44,7 @@ async function friendRequest(){
 
 .invite-friend-button{
     background-image: url('../assets/svgs/addfriend.svg');
-    background-color: white;
+    background-color: #f373b9;
 }
 
 .custom-button{

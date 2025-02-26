@@ -2,10 +2,11 @@ services:
   db-timeflow:
     image: mcr.microsoft.com/mssql/server:2019-latest
     ports:
-      - "1433:1433"
+      - "1466:1466"
     environment:
-      SA_PASSWORD: qUgeyvYnOKyMy9HRpGMaualJdsyq1QdIJUTp8Hz6HarKqCIiVmrm3ITHsBFQSMkEcrGXQy4FNHFX6zKq5NTzysbE0EVJnh3HZwl6DkAloQu7GQ1NZVVNnYEFkkAcxdun
+      SA_PASSWORD: "qUgeyvYnOKyMy9HRpGMaualJdsyq1QdIJUTp8Hz6HarKqCIiVmrm3ITHsBFQSMkEcrGXQy4FNHFX6zKq5NTzysbE0EVJnh3HZwl6DkAloQu7GQ1NZVVNnYEFkkAcxdun"
       ACCEPT_EULA: "Y"
+      MSSQL_TCP_PORT: "1466"  # Explicitly tell SQL Server to use port 1466
     volumes:
       - mssql_data:/var/opt/mssql
 
@@ -18,8 +19,8 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_URLS=http://+:80
-      - ConnectionStrings__DataConnectionString=Server=db-timeflow;Database=Data;Trusted_Connection=False;User Id=sa;Password=qUgeyvYnOKyMy9HRpGMaualJdsyq1QdIJUTp8Hz6HarKqCIiVmrm3ITHsBFQSMkEcrGXQy4FNHFX6zKq5NTzysbE0EVJnh3HZwl6DkAloQu7GQ1NZVVNnYEFkkAcxdun;MultipleActiveResultSets=true;TrustServerCertificate=True
-      - ConnectionStrings__AccountConnectionString=Server=db-timeflow;Database=Accounts;Trusted_Connection=False;User Id=sa;Password=qUgeyvYnOKyMy9HRpGMaualJdsyq1QdIJUTp8Hz6HarKqCIiVmrm3ITHsBFQSMkEcrGXQy4FNHFX6zKq5NTzysbE0EVJnh3HZwl6DkAloQu7GQ1NZVVNnYEFkkAcxdun;MultipleActiveResultSets=true;TrustServerCertificate=True
+      - ConnectionStrings__DataConnectionString=Server=db-timeflow,1466;Database=Data;Trusted_Connection=False;User Id=sa;Password=qUgeyvYnOKyMy9HRpGMaualJdsyq1QdIJUTp8Hz6HarKqCIiVmrm3ITHsBFQSMkEcrGXQy4FNHFX6zKq5NTzysbE0EVJnh3HZwl6DkAloQu7GQ1NZVVNnYEFkkAcxdun;MultipleActiveResultSets=true;TrustServerCertificate=True
+      - ConnectionStrings__AccountConnectionString=Server=db-timeflow,1466;Database=Accounts;Trusted_Connection=False;User Id=sa;Password=qUgeyvYnOKyMy9HRpGMaualJdsyq1QdIJUTp8Hz6HarKqCIiVmrm3ITHsBFQSMkEcrGXQy4FNHFX6zKq5NTzysbE0EVJnh3HZwl6DkAloQu7GQ1NZVVNnYEFkkAcxdun;MultipleActiveResultSets=true;TrustServerCertificate=True
       - Logging__LogLevel__Default=Information
     ports:
       - "8080:80"

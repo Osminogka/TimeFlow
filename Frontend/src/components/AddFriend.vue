@@ -1,7 +1,7 @@
 <script setup>
 import { watch, ref, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { getUsers } from '@/services/api/users';
+import usersAPi from '@/services/api/users';
 
 import SocialEntity from '@/view/SocialEntity.vue';
 import LoadingAnimation from '@/view/LoadingAnimation.vue';
@@ -20,7 +20,8 @@ const username = ref('');
 async function loadUsers(){
     loading.value = true;
     try{
-        let response = await getUsers(parseInt(currentPage.value));
+        let response = await usersAPi.getUsers(0);
+        console.log(response);
         if(response.success)
         {
             users.value = response.friendList;
@@ -43,7 +44,7 @@ async function getCertainUser(){
     users.value = [];
     loading.value = true;
     try{
-        let tempUser = await getUsers(username.value)
+        let tempUser = await usersAPi.getCertainUser(username.value)
         if(tempUser.success && tempUser.friendList.length > 0)
             users.value.push(tempUser.friendList[0]);
         loading.value = false;
@@ -88,114 +89,152 @@ function inviteIsSent(name){
 </script>
 
 <template>
-    <div class="addfriend-container">
-        <div class="search-container">
-            <form>
-                <input class="search-input-box" v-model="username" type="text" placeholder="Search.." name="search">
-                <button class="search-friend-button custom-button" type="submit" @click.prevent="searchFriend"><i class="fa fa-search"></i></button>
-            </form>
+  <div class="container">
+    <main class="content">
+      <div class="search-box">
+        <input v-model="username" type="text" placeholder="Search users..." class="search-input" />
+        <button class="search-btn" @click.prevent="searchFriend">
+          <i class="fa fa-search"></i>
+        </button>
+      </div>
+
+      <div class="friend-list">
+        <loading-animation v-if="loading" />
+        <div v-else-if="error" class="error">{{ error.message }}</div>
+        <div class="entity-list" v-if="users.length > 0">
+          <social-entity 
+            v-for="(user, index) in users" 
+            :key="index" 
+            :name="user" 
+            @friend-request="inviteIsSent" 
+          />
         </div>
-        <div class="friend-display-container">
-            <loading-animation v-if="loading" />
-            <div v-else-if="error" class="error">{{ error.message }}</div>
-            <div v-if="users.length > 0">
-                <social-entity v-for="(user, index) in users" :name="user" @friend-request="inviteIsSent" :key="index"/>
-            </div>
-            <div v-else-if="!loading">
-                <p>Such user don't exist</p>
-            </div>
+        <div v-else-if="!loading" class="no-results">
+          <p>No users found</p>
         </div>
-        <div class="page-nav-button-container">
-            <button v-if="currentPage > 0" class="page-nav-button page-nav-button-prev" @click="prevPage" />
-            <button v-if="users.length > 4" class="page-nav-button page-nav-button-next" @click="nextPage" />
-        </div>
-    </div>
+      </div>
+
+      <div class="pagination" v-if="users.length > 9 || currentPage > 0">
+        <button v-if="currentPage > 0" class="page-btn prev" @click="prevPage"></button>
+        <button v-if="users.length > 4" class="page-btn next" @click="nextPage"></button>
+      </div>
+    </main>
+  </div>
 </template>
-
+  
 <style scoped>
-.addfriend-container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-left: 0.2em;
-    width: 100%;
+.container {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+  background: #f373b9;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px #f373b9;
+  color: white;
+  margin-top: 1em;
 }
 
-.search-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    border-style: solid;
-    border-color: black;
-    border-width: 3px;
-    border-radius: 0.2em;
+.header {
+  padding: 1rem;
+  background: linear-gradient(90deg, #ff007f, #ff5e62);
+  border-radius: 10px 10px 0 0;
 }
 
-.page-nav-button-container{
-    display: flex;
-    flex-direction: row;
-    margin-top: auto;
-    justify-content: flex-end;
-    width: 100%;
+.header-text {
+  font-size: 1rem;
+  font-weight: bold;
 }
 
-.friend-display-container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    height: 100%;
+.search-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background: #f848a9;
+  margin: 1em;
+  border-radius: 8px;
 }
 
-.custom-button{
-    background-position: center;
-    background-size:contain;
-    background-repeat: no-repeat;
-    border: none;
+.search-input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+  background: #f10688;
+  color: white;
 }
 
-.search-friend-button{
-    background-image: url('../assets/svgs/search.svg');
-    border-left: 3px solid black;
-    margin-left: auto;
-    float: right;
-    height: 100%;
-    padding-right: 20px;
-    padding-left: 20px;
-    background-color: #ddd;
-    cursor: pointer;
+.search-btn {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background: linear-gradient(90deg, #ff007f, #ff5e62);
+  background-image: url('../assets/svgs/search.svg');
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s;
 }
 
-.search-input-box {
-    padding: 6px;
-    margin-top: 8px;
-    font-size: 17px;
-    border: none;
-    outline: none;
+.search-btn:hover {
+  transform: scale(1.05);
 }
 
-.search-friend-button:hover {
-    background-color: #ccc;
+.friend-list {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
 }
 
-.page-nav-button{
-    margin: auto;
-    width: 2.5em;
-    height: 1.5em;
-    border: none;
-    background-color: white;
-    background-repeat: no-repeat;
-    background-position: center;  
-    cursor: pointer;
+.entity-list{
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
 }
 
-.page-nav-button-next{
-    background-image: url('../assets/svgs/rightArrow.svg');
-    align-self: flex-start;
+.no-results {
+  color: #ff5e62;
 }
 
-.page-nav-button-prev{
-    background-image: url('../assets/svgs/leftArrow.svg');
-    align-self: flex-end;
+.pagination {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.page-btn {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: linear-gradient(90deg, #ff007f, #ff5e62);
+  cursor: pointer;
+  transition: transform 0.2s;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.page-btn.prev {
+  background-image: url('../assets/svgs/leftArrow.svg');
+  justify-self: start;
+  margin: auto;
+}
+
+.page-btn.next {
+  background-image: url('../assets/svgs/rightArrow.svg');
+  justify-self: end;
+  margin: auto;
+}
+
+.page-btn:hover {
+  transform: scale(1.1);
 }
 </style>

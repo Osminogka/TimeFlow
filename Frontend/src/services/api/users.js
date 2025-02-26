@@ -22,7 +22,36 @@ const getRequest = async (endpoint) => {
 }
 
 const getUsers = async (page) => {
-    return getRequest('/get/' + page);
+    console.log(page);
+    let response = {
+        success: true,
+        friendList: [
+            'Alice',
+            'Bob',
+            'Charlie',
+            'David',
+            'Eve',
+            'Frank',
+            'Grace',
+            'Heidi',
+            'Ivan',
+            'Judy',
+            'Kevin',
+        ]
+    }
+    return response;
+    
+}
+
+const getCertainUser = async (username) => {
+    console.log(username);
+    let response = {
+        success: true,
+        friendList: [
+            'Alice',
+        ]
+    }
+    return response;
 }
 
 const chageVisisbility = async () => {
@@ -31,5 +60,6 @@ const chageVisisbility = async () => {
   
 export default {
     getUsers,
+    getCertainUser,
     chageVisisbility,
 };

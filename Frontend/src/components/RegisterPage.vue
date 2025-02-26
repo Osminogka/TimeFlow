@@ -51,7 +51,7 @@ function verifyLogin() {
             <input class="input-field" type="text" id="username" v-model="username" placeholder="Username" required>
             <input class="input-field" type="email" id="email" v-model="email" placeholder="Email" required>
             <input class="input-field" type="password" id="password" v-model="password" placeholder="Password" required>
-            <button class="submit-button" type="submit" @click.prevent="verifyLogin()">Login</button>
+            <button class="submit-button" type="submit" @click.prevent="verifyLogin()">Register</button>
         </form>
         <p class="error-message" v-if="errorMessage">{{ errorMessage }}</p>
         <router-link class="button-redirect" :to="{ name: 'Login' }">Already have an account? Login here!</router-link>

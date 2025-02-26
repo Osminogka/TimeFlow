@@ -14,6 +14,7 @@
     <PackageJsonDependenciesFortawesomeVueFontawesome Condition="$(PackageJsonDependenciesFortawesomeVueFontawesome) == ''">^3.0.8</PackageJsonDependenciesFortawesomeVueFontawesome>
     <PackageJsonDependenciesVueuseCore Condition="$(PackageJsonDependenciesVueuseCore) == ''">^12.7.0</PackageJsonDependenciesVueuseCore>
     <PackageJsonDependenciesChartJs Condition="$(PackageJsonDependenciesChartJs) == ''">^4.4.8</PackageJsonDependenciesChartJs>
+    <PackageJsonDependenciesChartjsPluginDatalabels Condition="$(PackageJsonDependenciesChartjsPluginDatalabels) == ''">^2.2.0</PackageJsonDependenciesChartjsPluginDatalabels>
     <PackageJsonDependenciesCoreJs Condition="$(PackageJsonDependenciesCoreJs) == ''">^3.8.3</PackageJsonDependenciesCoreJs>
     <PackageJsonDependenciesRecharts Condition="$(PackageJsonDependenciesRecharts) == ''">^2.15.1</PackageJsonDependenciesRecharts>
     <PackageJsonDependenciesVue Condition="$(PackageJsonDependenciesVue) == ''">^3.2.13</PackageJsonDependenciesVue>
