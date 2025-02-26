@@ -47,6 +47,7 @@ export const clearToken = () => {
 };
 
 export default {
+  user,
   saveToken,
   getToken,
   isAuthenticated,

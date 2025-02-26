@@ -18,113 +18,111 @@ const error = ref(null);
 const username = ref('');
 
 async function loadUsers(){
-    loading.value = true;
-    try{
-        let response = await usersAPi.getUsers(0);
-        console.log(response);
-        if(response.success)
-        {
-            users.value = response.friendList;
-            error.value = "";
-        }
-        else
-        {
-            users.value = [];
-            error.value = "Server error!";
-        }
-        loading.value = false;
-    }
-    catch(err) {
-        error.value = err;
-        loading.value = false;
-    }
+  loading.value = true;
+  try{
+      let response = await usersAPi.getUsers(currentPage.value);
+      console.log(response);
+      if(response.success)
+      {
+          users.value = response.enum;
+          error.value = "";
+      }
+      else
+      {
+          users.value = [];
+          error.value = "Server error!";
+      }
+      loading.value = false;
+  }
+  catch(err) {
+      error.value = err;
+      loading.value = false;
+  }
 }
 
 async function getCertainUser(){
-    users.value = [];
-    loading.value = true;
-    try{
-        let tempUser = await usersAPi.getCertainUser(username.value)
-        if(tempUser.success && tempUser.friendList.length > 0)
-            users.value.push(tempUser.friendList[0]);
-        loading.value = false;
-    }
-    catch(err){
-        error.value = err;
-        loading.value = false;
-    }
+  users.value = [];
+  loading.value = true;
+  try{
+      let tempUser = await usersAPi.getCertainUser(username.value)
+      if(tempUser.success && tempUser.friendList.length > 0)
+          users.value.push(tempUser.friendList[0]);
+      loading.value = false;
+  }
+  catch(err){
+      error.value = err;
+      loading.value = false;
+  }
 }
 
 onMounted(() =>{
-    currentPage.value = parseInt(route.query.page) || 0;
-    loadUsers();
+  currentPage.value = parseInt(route.query.page) || 0;
+  loadUsers();
 });
 
 watch(() => route.query.page, (page) => {
-    currentPage.value = page;
-    loadUsers();
+  currentPage.value = page;
+  loadUsers();
 });
 
 function nextPage(){
-    currentPage.value++;
-    router.push({ query: { page: currentPage.value } });
+  currentPage.value++;
+  router.push({ query: { page: currentPage.value } });
 }
 
 function prevPage(){
-    if(currentPage.value < 1) return;
-    currentPage.value--;
-    router.push({ query: { page: currentPage.value } });
+  if(currentPage.value < 1) return;
+  currentPage.value--;
+  router.push({ query: { page: currentPage.value } });
 }
 
 function searchFriend(){
-    if(username.value == '') 
-        loadUsers();
-    else
-        getCertainUser();
+  if(username.value == '') 
+      loadUsers();
+  else
+      getCertainUser();
 }
 
 function inviteIsSent(name){
-    users.value = users.value.filter(user => user !== name);
+  users.value = users.value.filter(user => user !== name);
 }
 </script>
 
 <template>
   <div class="container">
-    <main class="content">
-      <div class="search-box">
-        <input v-model="username" type="text" placeholder="Search users..." class="search-input" />
-        <button class="search-btn" @click.prevent="searchFriend">
-          <i class="fa fa-search"></i>
-        </button>
-      </div>
+    <div class="search-box">
+      <input v-model="username" type="text" placeholder="Search users..." class="search-input" />
+      <button class="search-btn" @click.prevent="searchFriend">
+        <i class="fa fa-search"></i>
+      </button>
+    </div>
 
-      <div class="friend-list">
-        <loading-animation v-if="loading" />
-        <div v-else-if="error" class="error">{{ error.message }}</div>
-        <div class="entity-list" v-if="users.length > 0">
-          <social-entity 
-            v-for="(user, index) in users" 
-            :key="index" 
-            :name="user" 
-            @friend-request="inviteIsSent" 
-          />
-        </div>
-        <div v-else-if="!loading" class="no-results">
-          <p>No users found</p>
-        </div>
+    <div class="friend-list">
+      <loading-animation v-if="loading" />
+      <div v-else-if="error" class="error">{{ error.message }}</div>
+      <div class="entity-list" v-if="users.length > 0">
+        <social-entity 
+          v-for="(user, index) in users" 
+          :key="index" 
+          :name="user" 
+          @friend-request="inviteIsSent" 
+        />
       </div>
+      <div v-else-if="!loading" class="no-results">
+        <p>No users found</p>
+      </div>
+    </div>
 
-      <div class="pagination" v-if="users.length > 9 || currentPage > 0">
-        <button v-if="currentPage > 0" class="page-btn prev" @click="prevPage"></button>
-        <button v-if="users.length > 4" class="page-btn next" @click="nextPage"></button>
-      </div>
-    </main>
+    <div class="pagination" v-if="users.length > 3 || currentPage > 0">
+      <button v-if="currentPage > 0" class="page-btn prev" @click="prevPage"></button>
+      <button v-if="users.length > 3" class="page-btn next" @click="nextPage"></button>
+    </div>
   </div>
 </template>
   
 <style scoped>
 .container {
-  width: 100%;
+  width: 90%;
   max-width: 600px;
   margin: auto;
   padding: 20px;
@@ -134,17 +132,6 @@ function inviteIsSent(name){
   box-shadow: 0 4px 15px #f373b9;
   color: white;
   margin-top: 1em;
-}
-
-.header {
-  padding: 1rem;
-  background: linear-gradient(90deg, #ff007f, #ff5e62);
-  border-radius: 10px 10px 0 0;
-}
-
-.header-text {
-  font-size: 1rem;
-  font-weight: bold;
 }
 
 .search-box {
@@ -236,5 +223,12 @@ function inviteIsSent(name){
 
 .page-btn:hover {
   transform: scale(1.1);
+}
+
+@media (max-width: 756px) {
+  .container {
+    padding: 1px;
+    margin-top: 1em;
+  }
 }
 </style>

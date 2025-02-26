@@ -9,7 +9,7 @@ const getRequest = async (endpoint) => {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Baerer ${token}`
+            'Authorization': `Bearer ${token}`
         },
     });
 
@@ -22,25 +22,7 @@ const getRequest = async (endpoint) => {
 }
 
 const getUsers = async (page) => {
-    console.log(page);
-    let response = {
-        success: true,
-        friendList: [
-            'Alice',
-            'Bob',
-            'Charlie',
-            'David',
-            'Eve',
-            'Frank',
-            'Grace',
-            'Heidi',
-            'Ivan',
-            'Judy',
-            'Kevin',
-        ]
-    }
-    return response;
-    
+    return getRequest('/get/' + page);
 }
 
 const getCertainUser = async (username) => {

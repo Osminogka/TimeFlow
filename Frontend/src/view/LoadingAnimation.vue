@@ -40,7 +40,7 @@
     margin-left: calc(15px * 1.125);
     transform: rotate(45deg);
     border-radius: 10%;
-    border: 3px solid #03f7ff;
+    border: 3px solid #f373b9;
     overflow: hidden;
     background: transparent;
 

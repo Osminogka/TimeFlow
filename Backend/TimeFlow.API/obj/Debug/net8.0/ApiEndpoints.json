@@ -143,6 +143,22 @@
   },
   {
     "ContainingType": "TimeFlow.API.Controllers.TransactionsController",
+    "Method": "GetRecentTransactionsAsync",
+    "RelativePath": "api/transactions/recent/{page}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TimeFlow.API.Controllers.TransactionsController",
     "Method": "GetTransactionsForSelfAsync",
     "RelativePath": "api/transactions/self/{month}/{year}",
     "HttpMethod": "GET",

@@ -53,3 +53,17 @@
   transform: translateX(100%);
   opacity: 0;
 }
+
+.navlists-enter-active, .navlists-leave-active {
+  transition: all 0.3s ease-out;
+}
+
+.navlists-leave-active {
+  transition: all 0.3 ease-out;
+}
+
+.navlists-enter-from,
+.navlists-leave-to {
+  transform: translateX(-100px);
+  opacity: 0;
+}

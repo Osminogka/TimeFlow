@@ -34,6 +34,21 @@ namespace TimeFlow.API.Controllers
             }
         }
 
+        [HttpGet("recent/{page}")]
+        public async Task<IActionResult> GetRecentTransactionsAsync(int page)
+        {
+            try
+            {
+                var result = await _transactionService.GetRecentTransactions(getUserEmail(), page);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return HandleException(ex);
+            }
+        }
+
         [HttpGet("self/{month}/{year}")]
         public async Task<IActionResult> GetTransactionsForSelfAsync(int month, int year)
         {

@@ -1,31 +1,27 @@
 <script setup>
 import PieChart from '@/components/PieChartComponent.vue';
 
-import authApi from '@/services/utils';
 import transaction from '@/services/api/transaction';
 
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 
 import { onClickOutside } from '@vueuse/core';
 
-const transactions = ref(transaction.test_transactions);
+const transactions = ref(transaction.thisMonthTransactions.value);
 const router = useRouter();
 const route = useRoute();
 const menuOpen = ref(false);
 const menuRef = ref(null);
 
-function logout() {
-    authApi.clearToken();
-    window.location.href = '/';
-}
-
 function goToFriends() {
     router.push('/addfriend');
+    toggleMenu();
 }
 
 function goToProfile() {
     router.push({ name: 'Profile' });
+    toggleMenu();
 }
 
 function toggleMenu() {
@@ -34,6 +30,18 @@ function toggleMenu() {
 
 onClickOutside(menuRef, () => {
     menuOpen.value = false;
+});
+
+onMounted(async () => {
+    let time = new Date();
+    try{
+        let reposne = await transaction.getSelfTransaction(time.getMonth() + 1, time.getFullYear());
+        if(reposne.success){
+            transactions.value = reposne.enum;
+        }
+    } catch (error) {
+        console.error(error);
+    }
 });
 </script>
 
@@ -44,9 +52,8 @@ onClickOutside(menuRef, () => {
             <button class="menu-button" @click="toggleMenu" :class="{ rotated: menuOpen }">☰</button>
             <Transition name="dropdown">
                 <div v-if="menuOpen" ref="menuRef" class="menu-dropdown">
-                    <button @click="goToFriends">Friends</button>
-                    <button @click="goToProfile">Profile</button>
-                    <button class="logout-button" @click="logout">Logout</button>
+                    <button class="redirect-button" @click="goToFriends">Friends</button>
+                    <button class="redirect-button" @click="goToProfile">Profile</button>
                 </div>
             </Transition>
         </div>
@@ -92,7 +99,7 @@ onClickOutside(menuRef, () => {
 .menu-dropdown {
     position: absolute;
     right: 0;
-    background: #fff;
+    background: #f373b9;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     padding: 0.5rem;
@@ -112,7 +119,7 @@ onClickOutside(menuRef, () => {
 }
 
 .menu-dropdown button:hover {
-    background-color: #ddd;
+    background-color: #f449a7;
 }
 
 .logout-button {

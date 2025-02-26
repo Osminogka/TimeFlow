@@ -4,6 +4,7 @@ import { Pie } from 'vue-chartjs';
 import { onClickOutside } from '@vueuse/core';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
+import transactionApi from '@/services/api/transaction';
 
 ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 
@@ -11,15 +12,39 @@ const isModalOpen = ref(false);
 const modalRef = ref(null);
 const transactionData = ref({
     amount: '',
-    description: ''
+    description: '',
+    category: '',
+    date: ''
 });
 
 onClickOutside(modalRef, () => {
-    isModalOpen.value = false;
+  isModalOpen.value = false;
 });
 
-function openModal() {
-    isModalOpen.value = true;
+function openModal(category) {
+  isModalOpen.value = true;
+  transactionData.value.category = category;
+  const now = new Date();
+  const dateTime = new transactionApi.DateOnly(now.getFullYear(), now.getMonth() + 1, now.getDate());
+  transactionData.value.date = dateTime.toDateTimeString();
+}
+
+async function sendTransaction(){
+  try{
+    let response = await transactionApi.createTransaction(transactionData.value);
+    if(response.success){
+        transactionApi.thisMonthTransactions.value.push(transactionData.value);
+        isModalOpen.value = false;
+        transactionData.value = {
+            amount: '',
+            description: '',
+            category: '',
+            date: ''
+        };
+    }
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 function closeModal() {
@@ -36,7 +61,14 @@ const props = defineProps({
 });
 
 const chartData = computed(() => {
-  const categories = {};
+  const categories = {
+    "Food": 0,
+    "Transport": 0,
+    "Entertainment": 0,
+    "Health": 0,
+    "Education": 0,
+    "Other": 0
+  };
   
   props.transactions.forEach(tx => {
     categories[tx.category] = (categories[tx.category] || 0) + tx.amount;
@@ -94,7 +126,11 @@ const categoryValues = computed(() => {
 
 <template>
   <div class="chart-container">
-    <div class="pie-container">
+    <div v-if="transactions.length === 0" class="no-transactions">
+      <h2>No transactions to display</h2>
+      <p>Click the plus button to add a new transaction</p>
+    </div>
+    <div v-else class="pie-container">
       <Pie :data="chartData" :options="chartOptions" />
     </div>
     <ul class="legend">
@@ -103,7 +139,7 @@ const categoryValues = computed(() => {
           <span class="color-box" :style="{ backgroundColor: item.color }"></span>
           {{ item.category }}: ${{ item.value }}
         </div>
-        <button class="plus-buton" @click.prevent="openModal()" />
+        <button class="plus-buton" @click.prevent="openModal(item.category)" />
       </li>
     </ul>
   </div>
@@ -111,12 +147,12 @@ const categoryValues = computed(() => {
       <div v-if="isModalOpen" class="modal-overlay">
           <Transition name="slide-up">
               <div v-if="isModalOpen" ref="modalRef" class="modal-content">
-                  <h2>Add Transaction</h2>
+                  <h2>{{ transactionData.category }}</h2>
                   <form @submit.prevent="submitTransaction">
                       <input v-model="transactionData.amount" type="number" placeholder="Amount" required>
                       <input v-model="transactionData.description" type="text" placeholder="Description" required>
                       <div class="modal-actions">
-                          <button type="submit" class="submit-btn">Save</button>
+                          <button type="submit" class="submit-btn" @click.prevent="sendTransaction()">Save</button>
                           <button type="button" class="cancel-btn" @click="closeModal">Cancel</button>
                       </div>
                   </form>
@@ -132,6 +168,12 @@ const categoryValues = computed(() => {
   flex-direction: column;
   align-items: center;
   padding: 20px;
+}
+
+.no-transactions{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .legend {
@@ -213,6 +255,7 @@ const categoryValues = computed(() => {
   border: 1px solid #4437a3;
   border-radius: 5px;
   background-color: #dcaaf4;
+  outline: none;
 }
 
 .modal-actions {

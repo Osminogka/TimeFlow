@@ -1,6 +1,6 @@
 import { getToken } from '@/services/utils';
 
-const BASE_URL = '/api/friend';
+const BASE_URL = '/api/friends';
 const token = getToken();
 
 const getRequest = async (endpoint) => {
@@ -9,7 +9,7 @@ const getRequest = async (endpoint) => {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Baerer ${token}`
+            'Authorization': `Bearer ${token}`
         },
     });
 
@@ -22,10 +22,29 @@ const getRequest = async (endpoint) => {
 }
 
 const sendRequest = async (username) => {
-    return getRequest('/get/' + username);
+    return getRequest('/send/' + username);
 }
 
+const getFriendRequest = async () => {
+    return getRequest('/requests');
+}
+
+const getFriendList = async () => {
+    return getRequest('/list');
+}
+
+const acceptRequest = async (username) => {
+    return getRequest('/accept/' + username);
+}
+
+const rejectRequest = async (username) => {
+    return getRequest('/reject/' + username);
+}
   
 export default {
-    sendRequest
+    sendRequest,
+    getFriendRequest,
+    getFriendList,
+    acceptRequest,
+    rejectRequest,
 };

@@ -1,7 +1,7 @@
 <script setup>
 import { defineProps, defineEmits } from 'vue';
 
-import { sendRequest } from '@/services/api/friends';
+import frinedsApi from '@/services/api/friends';
 
 const props = defineProps({
     name: String,
@@ -10,9 +10,14 @@ const props = defineProps({
 const emits = defineEmits(['friend-request', 'group-enter']);
 
 async function friendRequest(){
-    let response = await sendRequest(props.name);
-    if(response.success)
-        emits('friend-request',props.name);
+    try{
+        let response = await frinedsApi.sendRequest(props.name);
+        if(response.success)
+            emits('friend-request',props.name);
+    }
+    catch(err){
+        console.log(err);
+    }
 }
 
 </script>
@@ -26,40 +31,61 @@ async function friendRequest(){
 
 <style scoped>
 
-.social-entity-container{
+.social-entity-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    border: 1px solid black;
-    border-radius: 5px;
+    border: 2px solid #4437a3;
+    border-radius: 8px;
     margin: 10px;
-    width: 20em;
-    padding: 10px;
+    width: 22em;
+    padding: 12px;
+    background: linear-gradient(90deg, #fc92d3, #dcaaf4);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s ease-in-out;
 }
 
-.name-display{
-    align-self: flex-start;
+.social-entity-container:hover {
+    transform: scale(1.03);
 }
 
-.invite-friend-button{
+.name-display {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #4437a3;
+}
+
+.invite-friend-button {
     background-image: url('../assets/svgs/addfriend.svg');
-    background-color: #f373b9;
+    background-color: transparent;
 }
 
-.custom-button{
+.custom-button {
     background-position: center;
-    background-size:contain;
+    background-size: contain;
     background-repeat: no-repeat;
     border: none;
-    width: 2em;
-    height: 2em;
+    width: 2.2em;
+    height: 2.2em;
     cursor: pointer;
+    transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
 }
 
-@media (max-width: 600px){
-    .social-entity-container{
-        width: 10em;
+.custom-button:hover {
+    transform: scale(1.1);
+    opacity: 0.8;
+}
+
+@media (max-width: 600px) {
+    .social-entity-container {
+        width: 14em;
+    }
+
+    .custom-button {
+        width: 1.8em;
+        height: 1.8em;
     }
 }
+
 </style>

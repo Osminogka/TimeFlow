@@ -1,26 +1,28 @@
 import { getToken } from '@/services/utils';
 
+import { ref } from 'vue';
+
 const BASE_URL = '/api/transactions';
 const token = getToken();
 
-const test_transactions = [
-    { amount: 120, category: 'Food', description: 'Lunch at a restaurant', date: '2024-02-01' },
-    { amount: 50, category: 'Transport', description: 'Bus ticket', date: '2024-02-02' },
-    { amount: 80, category: 'Entertainment', description: 'Movie night', date: '2024-02-03' },
-    { amount: 200, category: 'Shopping', description: 'New shoes', date: '2024-02-04' },
-    { amount: 150, category: 'Bills', description: 'Electricity bill', date: '2024-02-05' },
-    { amount: 90, category: 'Food', description: 'Groceries', date: '2024-02-06' },
-    { amount: 30, category: 'Transport', description: 'Taxi ride', date: '2024-02-07' },
-    { amount: 100, category: 'Health', description: 'Doctor appointment', date: '2024-02-08' },
-    { amount: 60, category: 'Entertainment', description: 'Concert ticket', date: '2024-02-09' },
-    { amount: 110, category: 'Food', description: 'Dinner with friends', date: '2024-02-10' },
-    { amount: 75, category: 'Shopping', description: 'New t-shirt', date: '2024-02-11' },
-    { amount: 200, category: 'Bills', description: 'Water bill', date: '2024-02-12' },
-    { amount: 40, category: 'Transport', description: 'Gas for car', date: '2024-02-13' },
-    { amount: 100, category: 'Entertainment', description: 'Video game purchase', date: '2024-02-14' },
-    { amount: 50, category: 'Health', description: 'Gym membership', date: '2024-02-15' },
-  ];
-  
+class DateOnly {
+    constructor(year, month, day) {
+        this.year = year;
+        this.month = month;
+        this.day = day;
+    }
+
+    static fromDateTimeString(dateTimeString) {
+        const date = new Date(dateTimeString);
+        return new DateOnly(date.getFullYear(), date.getMonth() + 1, date.getDate());
+    }
+
+    toDateTimeString() {
+        return `${this.year}-${String(this.month).padStart(2, '0')}-${String(this.day).padStart(2, '0')}T00:00:00Z`;
+    }
+}
+
+const thisMonthTransactions = ref([]);
 
 const postRequest = async (endpoint, data) => {
     const url = `${BASE_URL}${endpoint}`;
@@ -28,7 +30,7 @@ const postRequest = async (endpoint, data) => {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Baerer ${token}`
+            'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(data),
     });
@@ -47,7 +49,7 @@ const getRequest = async (endpoint) => {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Baerer ${token}`
+            'Authorization': `Bearer ${token}`
         },
     });
 
@@ -64,7 +66,14 @@ const createTransaction = async (transaction) => {
 };
 
 const getSelfTransaction = async (month, year,) => {
-    return getRequest('/self/' + month + '/' + year);
+    let response = await getRequest('/self/' + month + '/' + year);
+    if(response.success)
+        thisMonthTransactions.value = response.enum;
+    return response;
+}
+
+const getRecentTransactions = async (page) => {
+    return getRequest('/recent/' + page);
 }
 
 const getFriendTransaction = async (friendName, month, year) => {
@@ -73,7 +82,9 @@ const getFriendTransaction = async (friendName, month, year) => {
   
 export default {
     createTransaction,
+    getRecentTransactions,
     getSelfTransaction,
     getFriendTransaction,
-    test_transactions
+    thisMonthTransactions,
+    DateOnly
 };

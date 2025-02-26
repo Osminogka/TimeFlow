@@ -19,7 +19,7 @@ namespace TimeFlow.DL.Services
         public async Task<ResponseList<string>> GetUsersAsync(string userEmail, int page)
         {
             ResponseList<string> response = new ResponseList<string>();
-            int pageSize = 10;
+            int pageSize = 5;
 
             var user = await _userRepository.SingleOrDefaultAsync(obj => obj.Email == userEmail);
             if(user == null)

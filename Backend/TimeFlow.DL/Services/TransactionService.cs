@@ -60,6 +60,43 @@ namespace TimeFlow.DL.Services
             return response;
         }
 
+        public async Task<ResponseList<ReadTransactionDto>> GetRecentTransactions(string userEmail, int page)
+        {
+            ResponseList<ReadTransactionDto> response = new ResponseList<ReadTransactionDto>();
+            int pageSize = 20;
+
+            var user = await _userRepository.SingleOrDefaultAsync(obj => obj.Email == userEmail);
+            if(user == null)
+            {
+                response.Message = "Such user doesn't exist";
+                return response;
+            }
+
+            var transactions = await _transactionRepository
+                .Where(obj => obj.UserId == user.Id)
+                .OrderByDescending(obj => obj.Date)
+                .Skip(page * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+            var categories = await _categoryRepository.GetAllAsync();
+
+            foreach (Transaction transaction in transactions)
+            {
+                ReadTransactionDto readTransactionDto = new ReadTransactionDto
+                {
+                    Amount = transaction.Amount,
+                    Category = categories.SingleOrDefault(obj => obj.Id == transaction.CategoryId)?.Name ?? "Unknown",
+                    Date = transaction.Date,
+                    Description = transaction.Description
+                };
+                response.Enum.Add(readTransactionDto);
+            }
+
+            response.Success = true;
+            response.Message = "Got all transaction for this month";
+            return response;
+        }
+
         public async Task<ResponseList<ReadTransactionDto>> GetTransactionsForSelfAsync(string userEmail, int month, int year)
         {
             ResponseList<ReadTransactionDto> response = new ResponseList<ReadTransactionDto>();

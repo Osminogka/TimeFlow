@@ -1,2 +1,12 @@
 .idea/
 .vs/
+Frontend/dist/
+Frontend/node_modules/
+Backend/TimeFlow.API/bin/
+Backend/TimeFlow.API/obj/
+Backend/TimeFlow.DAL/bin/
+Backend/TimeFlow.DAL/obj/
+Backend/TimeFlow.DL/bin/
+Backend/TimeFlow.DL/obj/
+Backend/TimeFlow.Tests/bin/
+Backend/TimeFlow.Tests/obj/
