@@ -7,7 +7,7 @@ import { useRouter } from 'vue-router';
 const username = ref('');
 const email = ref('');
 const password = ref('');
-const errorMessage = ref('');
+const errorMessage = ref([]);
 
 const router = useRouter();
 
@@ -17,27 +17,63 @@ async function handleLogin() {
         if (result.success) {
             router.push('/');
         } else {
-            errorMessage.value = result.message;
+            errorMessage.value.push(result.message);
         }
     } catch (error) {
-        errorMessage.value = error.message;
+        errorMessage.value.push(error);
     }
 }
 
 function verifyLogin() {
-    errorMessage.value = '';
+    errorMessage.value = [];
 
-    if (email.value === '' || password.value === '' || username.value === '') {
-        errorMessage.value = 'Please fill in all fields';
-    } else if (password.value.length < 8) {
-        errorMessage.value = 'Password must be at least 8 characters';
-    } else if (!email.value.includes('@') || !email.value.includes('.')) {
-        errorMessage.value = 'Invalid email address';
-    } else if (username.value.length < 4) {
-        errorMessage.value = 'Username must be at least 4 characters';
+    const passwordRegex = {
+        length: /.{6,}/,
+        uppercase: /[A-Z]/,
+        lowercase: /[a-z]/,
+        digit: /\d/,
+        nonAlphanumeric: /[^a-zA-Z0-9]/,
+    };
+
+    const usernameRegex = /^[a-zA-Z0-9_]+$/;
+
+    if (!email.value || !password.value || !username.value) {
+        errorMessage.value.push('Please fill in all fields.');
     }
 
-    if (errorMessage.value === '') {
+    if (!email.value.includes('@') || !email.value.includes('.')) {
+        errorMessage.value.push('Invalid email address.');
+    }
+
+    if (!usernameRegex.test(username.value)) {
+        errorMessage.value.push('Username can only contain letters, numbers, and underscores.');
+    }
+
+    if (username.value.length < 4) {
+        errorMessage.value.push('Username must be at least 4 characters.');
+    }
+
+    if (!passwordRegex.length.test(password.value)) {
+        errorMessage.value.push('Password must be at least 6 characters.');
+    }
+
+    if (!passwordRegex.uppercase.test(password.value)) {
+        errorMessage.value.push('Password must contain at least one uppercase letter.');
+    }
+
+    if (!passwordRegex.lowercase.test(password.value)) {
+        errorMessage.value.push('Password must contain at least one lowercase letter.');
+    }
+
+    if (!passwordRegex.digit.test(password.value)) {
+        errorMessage.value.push('Password must contain at least one digit.');
+    }
+
+    if (!passwordRegex.nonAlphanumeric.test(password.value)) {
+        errorMessage.value.push('Password must contain at least one special character.');
+    }
+
+    if (errorMessage.value.length === 0) {
         handleLogin();
     }
 }
@@ -53,7 +89,9 @@ function verifyLogin() {
             <input class="input-field" type="password" id="password" v-model="password" placeholder="Password" required>
             <button class="submit-button" type="submit" @click.prevent="verifyLogin()">Register</button>
         </form>
-        <p class="error-message" v-if="errorMessage">{{ errorMessage }}</p>
+        <div v-if="errorMessage.length > 0">
+            <p class="error-message" v-for="(error,key) in errorMessage" v-bind:key="key">{{ error }}</p>
+        </div>
         <router-link class="button-redirect" :to="{ name: 'Login' }">Already have an account? Login here!</router-link>
     </div>
 </template>

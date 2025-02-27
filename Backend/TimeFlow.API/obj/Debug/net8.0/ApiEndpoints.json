@@ -49,6 +49,22 @@
   },
   {
     "ContainingType": "TimeFlow.API.Controllers.FriendsController",
+    "Method": "DeleteFriendAsync",
+    "RelativePath": "api/friends/delete/{friendName}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "friendName",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TimeFlow.API.Controllers.FriendsController",
     "Method": "GetFriendsListAsync",
     "RelativePath": "api/friends/list",
     "HttpMethod": "GET",
@@ -189,6 +205,22 @@
       {
         "Name": "page",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TimeFlow.API.Controllers.UsersController",
+    "Method": "GetAllUsersAsync",
+    "RelativePath": "api/user/getbyname/{username}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "username",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],

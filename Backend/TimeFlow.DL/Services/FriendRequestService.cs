@@ -118,9 +118,7 @@ namespace TimeFlow.DL.Services
                 return response;
             }
 
-            var entryExist = await _friendRequestsRepository.SingleOrDefaultAsync(obj => 
-                (((obj.ReceiverId == user.Id && obj.SenderId == receiver.Id)
-                  || (obj.ReceiverId == receiver.Id && obj.SenderId == user.Id)))
+            var entryExist = await _friendRequestsRepository.SingleOrDefaultAsync(obj => (obj.ReceiverId == receiver.Id && obj.SenderId == user.Id)
                 && !obj.IsAccepted);
             if(entryExist != null)
             {
@@ -168,6 +166,10 @@ namespace TimeFlow.DL.Services
             }
             entryExist.IsAccepted = true;
             await _friendRequestsRepository.UpdateAsync(entryExist);
+
+            var secondRequest = await _friendRequestsRepository.SingleOrDefaultAsync(obj => obj.ReceiverId == sender.Id && obj.SenderId == user.Id && !obj.IsAccepted);
+            if(secondRequest != null)
+                await _friendRequestsRepository.DeleteAsync(secondRequest);
 
             response.Success = true;
             response.Message = "Friend request accepted";

@@ -49,8 +49,8 @@ builder.Services.Configure<IdentityOptions>(opts =>
     opts.Password.RequiredLength = 6;
     opts.Password.RequireNonAlphanumeric = true;
     opts.Password.RequireLowercase = true;
-    opts.Password.RequireUppercase = true;
     opts.Password.RequireDigit = true;
+    opts.Password.RequireUppercase = true;
     opts.User.RequireUniqueEmail = true;
     opts.User.AllowedUserNameCharacters = "1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM_";
 });

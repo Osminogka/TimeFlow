@@ -113,9 +113,9 @@ function inviteIsSent(name){
       </div>
     </div>
 
-    <div class="pagination" v-if="users.length > 3 || currentPage > 0">
+    <div class="pagination" v-if="users.length > 0 || currentPage > 0">
       <button v-if="currentPage > 0" class="page-btn prev" @click="prevPage"></button>
-      <button v-if="users.length > 3" class="page-btn next" @click="nextPage"></button>
+      <button v-if="users.length > 0" class="page-btn next" @click="nextPage"></button>
     </div>
   </div>
 </template>

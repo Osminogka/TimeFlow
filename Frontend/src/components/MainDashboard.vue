@@ -1,5 +1,6 @@
 <script setup>
 import PieChart from '@/components/PieChartComponent.vue';
+import LoadingAnimation from '@/view/LoadingAnimation.vue';
 
 import transaction from '@/services/api/transaction';
 
@@ -13,6 +14,21 @@ const router = useRouter();
 const route = useRoute();
 const menuOpen = ref(false);
 const menuRef = ref(null);
+const loading = ref(false);
+
+async function fetchTransactions() {
+    try{
+        loading.value = true;
+        let time = new Date();
+        let reposne = await transaction.getSelfTransaction(time.getMonth() + 1, time.getFullYear());
+        if(reposne.success){
+            transactions.value = reposne.enum;
+        }
+    } catch (error) {
+        console.error(error);
+    }
+    loading.value = false;
+}
 
 function goToFriends() {
     router.push('/addfriend');
@@ -33,15 +49,7 @@ onClickOutside(menuRef, () => {
 });
 
 onMounted(async () => {
-    let time = new Date();
-    try{
-        let reposne = await transaction.getSelfTransaction(time.getMonth() + 1, time.getFullYear());
-        if(reposne.success){
-            transactions.value = reposne.enum;
-        }
-    } catch (error) {
-        console.error(error);
-    }
+    await fetchTransactions();
 });
 </script>
 
@@ -59,7 +67,8 @@ onMounted(async () => {
         </div>
     </header>
 
-    <router-view class="dashboard-container">
+    <LoadingAnimation v-if="loading" />
+    <router-view v-else class="dashboard-container">
         <component 
             :is="route.path === '/' ? PieChart : route.matched[0]?.components.default" 
             v-bind="route.path === '/' ? { transactions: transactions } : {}" 

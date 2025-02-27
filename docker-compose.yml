@@ -23,8 +23,8 @@ services:
       - ConnectionStrings__AccountConnectionString=Server=db-timeflow,1466;Database=Accounts;Trusted_Connection=False;User Id=sa;Password=qUgeyvYnOKyMy9HRpGMaualJdsyq1QdIJUTp8Hz6HarKqCIiVmrm3ITHsBFQSMkEcrGXQy4FNHFX6zKq5NTzysbE0EVJnh3HZwl6DkAloQu7GQ1NZVVNnYEFkkAcxdun;MultipleActiveResultSets=true;TrustServerCertificate=True
       - Logging__LogLevel__Default=Information
     ports:
-      - "8080:80"
-      - "8081:443"
+      - "80:80"
+      - "443:443"
     depends_on:
       - db-timeflow
 

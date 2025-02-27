@@ -82,6 +82,7 @@ namespace TimeFlow.DL.Services
                 return response;
             }
 
+            response.Message = result.Errors.FirstOrDefault()?.Description ?? "Couldn't create user";
             return response;
         }
 

@@ -1,36 +1,43 @@
 {
   "format": 1,
   "restore": {
-    "/home/osminogka/Desktop/Programming/Csharp/TimeFlow/Backend/TimeFlow.API/TimeFlow.API.csproj": {}
+    "E:\\Programming\\Server\\TimeFlow\\Backend\\TimeFlow.API\\TimeFlow.API.csproj": {}
   },
   "projects": {
-    "/home/osminogka/Desktop/Programming/Csharp/TimeFlow/Backend/TimeFlow.API/TimeFlow.API.csproj": {
+    "E:\\Programming\\Server\\TimeFlow\\Backend\\TimeFlow.API\\TimeFlow.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/osminogka/Desktop/Programming/Csharp/TimeFlow/Backend/TimeFlow.API/TimeFlow.API.csproj",
+        "projectUniqueName": "E:\\Programming\\Server\\TimeFlow\\Backend\\TimeFlow.API\\TimeFlow.API.csproj",
         "projectName": "TimeFlow.API",
-        "projectPath": "/home/osminogka/Desktop/Programming/Csharp/TimeFlow/Backend/TimeFlow.API/TimeFlow.API.csproj",
-        "packagesPath": "/home/osminogka/.nuget/packages/",
-        "outputPath": "/home/osminogka/Desktop/Programming/Csharp/TimeFlow/Backend/TimeFlow.API/obj/",
+        "projectPath": "E:\\Programming\\Server\\TimeFlow\\Backend\\TimeFlow.API\\TimeFlow.API.csproj",
+        "packagesPath": "C:\\Users\\David Korobchenko\\.nuget\\packages\\",
+        "outputPath": "E:\\Programming\\Server\\TimeFlow\\Backend\\TimeFlow.API\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/home/osminogka/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\David Korobchenko\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/home/osminogka/Desktop/Programming/Csharp/TimeFlow/Backend/TimeFlow.DAL/TimeFlow.DAL.csproj": {
-                "projectPath": "/home/osminogka/Desktop/Programming/Csharp/TimeFlow/Backend/TimeFlow.DAL/TimeFlow.DAL.csproj"
+              "E:\\Programming\\Server\\TimeFlow\\Backend\\TimeFlow.DAL\\TimeFlow.DAL.csproj": {
+                "projectPath": "E:\\Programming\\Server\\TimeFlow\\Backend\\TimeFlow.DAL\\TimeFlow.DAL.csproj"
               },
-              "/home/osminogka/Desktop/Programming/Csharp/TimeFlow/Backend/TimeFlow.DL/TimeFlow.DL.csproj": {
-                "projectPath": "/home/osminogka/Desktop/Programming/Csharp/TimeFlow/Backend/TimeFlow.DL/TimeFlow.DL.csproj"
+              "E:\\Programming\\Server\\TimeFlow\\Backend\\TimeFlow.DL\\TimeFlow.DL.csproj": {
+                "projectPath": "E:\\Programming\\Server\\TimeFlow\\Backend\\TimeFlow.DL\\TimeFlow.DL.csproj"
               }
             }
           }
@@ -39,6 +46,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -83,12 +95,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[8.0.13, 8.0.13]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -97,26 +103,33 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.113/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400-preview.0.24324.5/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "/home/osminogka/Desktop/Programming/Csharp/TimeFlow/Backend/TimeFlow.DAL/TimeFlow.DAL.csproj": {
+    "E:\\Programming\\Server\\TimeFlow\\Backend\\TimeFlow.DAL\\TimeFlow.DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/osminogka/Desktop/Programming/Csharp/TimeFlow/Backend/TimeFlow.DAL/TimeFlow.DAL.csproj",
+        "projectUniqueName": "E:\\Programming\\Server\\TimeFlow\\Backend\\TimeFlow.DAL\\TimeFlow.DAL.csproj",
         "projectName": "TimeFlow.DAL",
-        "projectPath": "/home/osminogka/Desktop/Programming/Csharp/TimeFlow/Backend/TimeFlow.DAL/TimeFlow.DAL.csproj",
-        "packagesPath": "/home/osminogka/.nuget/packages/",
-        "outputPath": "/home/osminogka/Desktop/Programming/Csharp/TimeFlow/Backend/TimeFlow.DAL/obj/",
+        "projectPath": "E:\\Programming\\Server\\TimeFlow\\Backend\\TimeFlow.DAL\\TimeFlow.DAL.csproj",
+        "packagesPath": "C:\\Users\\David Korobchenko\\.nuget\\packages\\",
+        "outputPath": "E:\\Programming\\Server\\TimeFlow\\Backend\\TimeFlow.DAL\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/home/osminogka/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\David Korobchenko\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -129,6 +142,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -183,45 +201,46 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[8.0.13, 8.0.13]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.113/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400-preview.0.24324.5/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "/home/osminogka/Desktop/Programming/Csharp/TimeFlow/Backend/TimeFlow.DL/TimeFlow.DL.csproj": {
+    "E:\\Programming\\Server\\TimeFlow\\Backend\\TimeFlow.DL\\TimeFlow.DL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/osminogka/Desktop/Programming/Csharp/TimeFlow/Backend/TimeFlow.DL/TimeFlow.DL.csproj",
+        "projectUniqueName": "E:\\Programming\\Server\\TimeFlow\\Backend\\TimeFlow.DL\\TimeFlow.DL.csproj",
         "projectName": "TimeFlow.DL",
-        "projectPath": "/home/osminogka/Desktop/Programming/Csharp/TimeFlow/Backend/TimeFlow.DL/TimeFlow.DL.csproj",
-        "packagesPath": "/home/osminogka/.nuget/packages/",
-        "outputPath": "/home/osminogka/Desktop/Programming/Csharp/TimeFlow/Backend/TimeFlow.DL/obj/",
+        "projectPath": "E:\\Programming\\Server\\TimeFlow\\Backend\\TimeFlow.DL\\TimeFlow.DL.csproj",
+        "packagesPath": "C:\\Users\\David Korobchenko\\.nuget\\packages\\",
+        "outputPath": "E:\\Programming\\Server\\TimeFlow\\Backend\\TimeFlow.DL\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/home/osminogka/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\David Korobchenko\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/home/osminogka/Desktop/Programming/Csharp/TimeFlow/Backend/TimeFlow.DAL/TimeFlow.DAL.csproj": {
-                "projectPath": "/home/osminogka/Desktop/Programming/Csharp/TimeFlow/Backend/TimeFlow.DAL/TimeFlow.DAL.csproj"
+              "E:\\Programming\\Server\\TimeFlow\\Backend\\TimeFlow.DAL\\TimeFlow.DAL.csproj": {
+                "projectPath": "E:\\Programming\\Server\\TimeFlow\\Backend\\TimeFlow.DAL\\TimeFlow.DAL.csproj"
               }
             }
           }
@@ -230,6 +249,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -246,18 +270,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[8.0.13, 8.0.13]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.113/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400-preview.0.24324.5/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

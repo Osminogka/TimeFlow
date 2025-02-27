@@ -24,7 +24,10 @@ async function friendRequest(){
 
 <template>
     <div class="social-entity-container">
-        <p class="name-display">{{ name }}</p>
+        <p class="name-display">
+            {{ name }} 
+            <span class="crone" v-if="name === 'Osminogka'">👑</span>
+        </p>
         <button @click="friendRequest" class="invite-friend-button custom-button"></button>
     </div>
 </template>
@@ -86,6 +89,10 @@ async function friendRequest(){
         width: 1.8em;
         height: 1.8em;
     }
+}
+
+.crone{
+    font-size: 1.2em;
 }
 
 </style>

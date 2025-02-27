@@ -89,8 +89,8 @@ namespace TimeFlow.DL.Repositories
             return await _context.Users
                 .Where(u => u.Id != userId &&
                             !_context.FriendRequests.Any(fr =>
-                                (fr.SenderId == userId && fr.ReceiverId == u.Id) ||
-                                (fr.ReceiverId == userId && fr.SenderId == u.Id)))
+                                ((fr.SenderId == userId && fr.ReceiverId == u.Id) ||
+                                (fr.ReceiverId == userId && fr.SenderId == u.Id)) && fr.IsAccepted))
                 .OrderBy(u => u.Username)
                 .Skip(page * pageSize)
                 .Take(pageSize)
@@ -102,8 +102,8 @@ namespace TimeFlow.DL.Repositories
             return await _context.Users
                 .Where(u => u.Id != userId && u.Username == friendName &&
                             !_context.FriendRequests.Any(fr =>
-                                (fr.SenderId == userId && fr.ReceiverId == u.Id) ||
-                                (fr.ReceiverId == userId && fr.SenderId == u.Id)))
+                                ((fr.SenderId == userId && fr.ReceiverId == u.Id) ||
+                                (fr.ReceiverId == userId && fr.SenderId == u.Id)) && fr.IsAccepted))
                 .OrderBy(u => u.Username)
                 .ToListAsync();
         }
