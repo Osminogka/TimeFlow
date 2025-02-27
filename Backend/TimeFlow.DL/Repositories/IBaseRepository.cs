@@ -16,5 +16,7 @@ namespace TimeFlow.DL.Repositories
         Task<int> UpdateAsync(T entity);
         Task<int> DeleteAsync(T entity);
         Task<int> DeleteRangeAsync(List<T> entities);
+        Task<List<User>> GetNonFriendsAsync(long userId, int page, int pageSize);
+        Task<List<User>> GetNonFriendsAsyncByName(long userId, string friendName);
     }
 }

@@ -31,6 +31,21 @@ namespace TimeFlow.API.Controllers
                 return HandleException(ex);
             }
         }
+        
+        [HttpGet("getbyname/{username}")]
+        public async Task<IActionResult> GetAllUsersAsync(string username)
+        {
+            try
+            {
+                var result = await _userService.GetUsersByNameAsync(getUserEmail(), username);
+                return Ok(result);
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return HandleException(ex);
+            }
+        }
 
         [HttpGet("visibility")]
         public async Task<IActionResult> ChangeAccountVisibilityAsync()

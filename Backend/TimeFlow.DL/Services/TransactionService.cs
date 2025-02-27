@@ -163,7 +163,7 @@ namespace TimeFlow.DL.Services
                 ReadFriendTransactionDto readTransactionDto = new ReadFriendTransactionDto
                 {
                     Amount = transaction.Amount,
-                    Category = categories.SingleOrDefault(obj => obj.Id == transaction.Id)!.Name,
+                    Category = categories.SingleOrDefault(obj => obj.Id == transaction.CategoryId)!.Name,
                     Date = transaction.Date
                 };
                 response.Enum.Add(readTransactionDto);

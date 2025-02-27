@@ -44,9 +44,9 @@ async function getCertainUser(){
   users.value = [];
   loading.value = true;
   try{
-      let tempUser = await usersAPi.getCertainUser(username.value)
-      if(tempUser.success && tempUser.friendList.length > 0)
-          users.value.push(tempUser.friendList[0]);
+      let tempUser = await usersAPi.getUserByName(username.value)
+      if(tempUser.success && tempUser.enum.length > 0)
+          users.value.push(tempUser.enum[0]);
       loading.value = false;
   }
   catch(err){

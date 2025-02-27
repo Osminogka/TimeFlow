@@ -28,22 +28,28 @@ namespace TimeFlow.DL.Services
                 return response;
             }
 
-            var nonFriends = (
-                from u in await _userRepository.GetAllAsync()
-                where u.Id != user.Id
-                join fr in await _friendsRequestRepository.GetAllAsync()
-                    on new { UserId = user.Id, FriendId = u.Id }
-                    equals new { UserId = fr.SenderId, FriendId = fr.ReceiverId }
-                    into friendRequests
-                from fr in friendRequests.DefaultIfEmpty()
-                where fr == null || !fr.IsAccepted
-                select u.Username
-            )
-            .Skip(page * pageSize)
-            .Take(pageSize)
-            .ToList();
+            var nonFriends = await _userRepository.GetNonFriendsAsync(user.Id, page, pageSize);
 
-            response.Enum = nonFriends;
+            response.Enum = nonFriends.Select(obj => obj.Username).ToList();
+            response.Success = true;
+            response.Message = "Got some users";
+            return response;
+        }
+        
+        public async Task<ResponseList<string>> GetUsersByNameAsync(string userEmail, string friendName)
+        {
+            ResponseList<string> response = new ResponseList<string>();
+
+            var user = await _userRepository.SingleOrDefaultAsync(obj => obj.Email == userEmail);
+            if(user == null)
+            {
+                response.Message = "Such user doen't exist";
+                return response;
+            }
+
+            var nonFriends = await _userRepository.GetNonFriendsAsyncByName(user.Id, friendName);
+
+            response.Enum = nonFriends.Select(obj => obj.Username).ToList();
             response.Success = true;
             response.Message = "Got some users";
             return response;

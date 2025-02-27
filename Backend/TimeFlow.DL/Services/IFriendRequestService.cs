@@ -12,6 +12,7 @@ namespace TimeFlow.DL.Services
     {
         Task<ResponseList<string>> GetFriendRequestsAsync(string userEmail);
         Task<ResponseList<string>> GetFriendsListAsync(string userEmail);
+        Task<ResponseMessage> DeleteFriendAsync(string userEmail, string friendName);
         Task<ResponseMessage> SendFriendRequestAsync(string userEmail, string receiverUsername);
         Task<ResponseMessage> AcceptFriendRequestAsync(string userEmail, string senderUsername);
         Task<ResponseMessage> RejectFriendRequestAsync(string userEmail, string senderUsername);

@@ -38,6 +38,15 @@ const routes = [
             title: "Profile",
             requireAuth: true
         }
+    },
+    {
+        path: "/friend",
+        name: "Friend",
+        component: () => import("../components/FriendProfile.vue"),
+        meta:{
+            title: "Friend",
+            requireAuth: true
+        }
     }
 ];
 

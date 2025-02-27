@@ -46,6 +46,21 @@ namespace TimeFlow.API.Controllers
                 return HandleException(ex);
             }
         }
+        
+        [HttpGet("delete/{friendName}")]
+        public async Task<IActionResult> DeleteFriendAsync(string friendName)
+        {
+            try
+            {
+                var result = await _friendRequestService.DeleteFriendAsync(getUserEmail(), friendName);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return HandleException(ex);
+            }
+        }
 
         [HttpGet("send/{receiverName}")]
         public async Task<IActionResult> SendFriendRequestAsync(string receiverName)

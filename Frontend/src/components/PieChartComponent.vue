@@ -8,6 +8,15 @@ import transactionApi from '@/services/api/transaction';
 
 ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 
+const props = defineProps({
+  transactions: Array,
+  forSelf: {
+    type: Boolean,
+    default: true
+  }
+});
+
+
 const isModalOpen = ref(false);
 const modalRef = ref(null);
 const transactionData = ref({
@@ -55,10 +64,6 @@ function submitTransaction() {
     console.log('Transaction submitted:', transactionData.value);
     isModalOpen.value = false;
 }
-
-const props = defineProps({
-  transactions: Array
-});
 
 const chartData = computed(() => {
   const categories = {
@@ -139,7 +144,7 @@ const categoryValues = computed(() => {
           <span class="color-box" :style="{ backgroundColor: item.color }"></span>
           {{ item.category }}: ${{ item.value }}
         </div>
-        <button class="plus-buton" @click.prevent="openModal(item.category)" />
+        <button v-if="forSelf" class="plus-buton" @click.prevent="openModal(item.category)" />
       </li>
     </ul>
   </div>

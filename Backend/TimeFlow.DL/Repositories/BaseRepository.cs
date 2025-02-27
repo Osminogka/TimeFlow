@@ -83,5 +83,29 @@ namespace TimeFlow.DL.Repositories
             _context.RemoveRange(entities);
             return await _context.SaveChangesAsync();
         }
+        
+        public async Task<List<User>> GetNonFriendsAsync(long userId, int page, int pageSize)
+        {
+            return await _context.Users
+                .Where(u => u.Id != userId &&
+                            !_context.FriendRequests.Any(fr =>
+                                (fr.SenderId == userId && fr.ReceiverId == u.Id) ||
+                                (fr.ReceiverId == userId && fr.SenderId == u.Id)))
+                .OrderBy(u => u.Username)
+                .Skip(page * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+        }
+        
+        public async Task<List<User>> GetNonFriendsAsyncByName(long userId, string friendName)
+        {
+            return await _context.Users
+                .Where(u => u.Id != userId && u.Username == friendName &&
+                            !_context.FriendRequests.Any(fr =>
+                                (fr.SenderId == userId && fr.ReceiverId == u.Id) ||
+                                (fr.ReceiverId == userId && fr.SenderId == u.Id)))
+                .OrderBy(u => u.Username)
+                .ToListAsync();
+        }
     }
 }

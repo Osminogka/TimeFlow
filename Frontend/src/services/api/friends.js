@@ -40,11 +40,16 @@ const acceptRequest = async (username) => {
 const rejectRequest = async (username) => {
     return getRequest('/reject/' + username);
 }
-  
+
+const deleteFriend = async (username) => {
+    return getRequest('/delete/' + username);
+}
+
 export default {
     sendRequest,
     getFriendRequest,
     getFriendList,
     acceptRequest,
     rejectRequest,
+    deleteFriend
 };

@@ -25,15 +25,8 @@ const getUsers = async (page) => {
     return getRequest('/get/' + page);
 }
 
-const getCertainUser = async (username) => {
-    console.log(username);
-    let response = {
-        success: true,
-        friendList: [
-            'Alice',
-        ]
-    }
-    return response;
+const getUserByName = async (username) => {
+    return getRequest('/getbyname/' + username);
 }
 
 const chageVisisbility = async () => {
@@ -42,6 +35,6 @@ const chageVisisbility = async () => {
   
 export default {
     getUsers,
-    getCertainUser,
+    getUserByName,
     chageVisisbility,
 };

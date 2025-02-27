@@ -147,12 +147,37 @@ function showList(list){
   showInterface[list] = !showInterface[list];
 }
 
-async function approveRequest(){
-    console.log('Approve request');
+async function approveRequest(username){
+   try{
+        const response = await friendsApi.acceptRequest(username);
+        if(response.success){
+            friends.value.push(username);
+            requests.value = requests.value.filter(request => request !== username);
+            console.log('Request approved');
+        }
+        else{
+            console.log(response.message);
+        }
+    }
+    catch (error) {
+        console.error(error);
+    }
 }
 
-async function rejectRequest() {
-    console.log('Reject request');
+async function rejectRequest(username) {
+    try{
+        const response = await friendsApi.rejectRequest(username);
+        if(response.success){
+            requests.value = requests.value.filter(request => request !== username);
+            console.log('Request rejected');
+        }
+        else{
+            console.log(response.message);
+        }
+    }
+    catch (error) {
+        console.error(error);
+    }
 }
 
 </script>
@@ -208,7 +233,10 @@ async function rejectRequest() {
                     <div v-if="friends.length" class="scrollable-list">
                         <ul class="list">
                             <li v-for="friend in friends" :key="friend.id" class="list-item">
-                                {{ friend }}
+                                <div class="friend-container">
+                                    <p>{{ friend }}</p>
+                                    <router-link class="friend-redirect custom-button" :to="{ path: '/friend', query: { username: friend } }"></router-link>
+                                </div>
                             </li>
                         </ul>
                     </div>
@@ -419,6 +447,16 @@ p {
 
 .reject-button{
     background-image: url('../assets/svgs/xmark.svg');
+}
+
+.friend-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.friend-redirect{
+    background-image: url('../assets/svgs/user.svg');
 }
 
 </style>
