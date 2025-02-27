@@ -133,7 +133,7 @@ const categoryValues = computed(() => {
   <div class="chart-container">
     <div v-if="transactions.length === 0" class="no-transactions">
       <h2>No transactions to display</h2>
-      <p>Click the plus button to add a new transaction</p>
+      <p v-if="forSelf">Click the plus button to add a new transaction</p>
     </div>
     <div v-else class="pie-container">
       <Pie :data="chartData" :options="chartOptions" />

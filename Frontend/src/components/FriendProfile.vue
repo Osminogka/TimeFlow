@@ -52,7 +52,10 @@ async function deleteFriendButton(friendName) {
 <template>
     <div v-if="error.length === 0">
         <div class="header">
-            <h1>{{ friendName }}</h1>
+            <div class="crone-container">
+                <h1>{{ friendName }}</h1>
+                <span class="crone" v-if="friendName === 'Osminogka'">👑</span>
+            </div>
             <button class="delete-button custom-button" @click="deleteFriendButton(friendName)" />
         </div>
         <div v-if="loading"><LoadingAnimation /></div>
@@ -109,5 +112,14 @@ async function deleteFriendButton(friendName) {
     animation: fadeIn 0.5s ease-in-out;
 }
 
+.crone-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.crone{
+    font-size: 1.5em;
+}
 
 </style>

@@ -208,7 +208,10 @@ async function rejectRequest(username) {
                         <ul class="list">
                             <li v-for="request in requests" :key="request.id" class="list-item">
                                 <div class="container-request">
-                                    <p>{{ request }}</p>
+                                    <div class="crone-container">
+                                        <p>{{ request }}</p>
+                                        <span class="crone" v-if="request === 'Osminogka'">👑</span>
+                                    </div>
                                     <div class="action-buttons-container">
                                         <button class="custom-button approve-button" @click="approveRequest(request)"></button>
                                         <button class="custom-button reject-button" @click="rejectRequest(request)"></button>
@@ -234,7 +237,10 @@ async function rejectRequest(username) {
                         <ul class="list">
                             <li v-for="friend in friends" :key="friend.id" class="list-item">
                                 <div class="friend-container">
-                                    <p>{{ friend }}</p>
+                                    <div class="crone-container">
+                                        <p>{{ friend }}</p>
+                                        <span class="crone" v-if="friend === 'Osminogka'">👑</span>
+                                    </div>
                                     <router-link class="friend-redirect custom-button" :to="{ path: '/friend', query: { username: friend } }"></router-link>
                                 </div>
                             </li>
@@ -457,6 +463,16 @@ p {
 
 .friend-redirect{
     background-image: url('../assets/svgs/user.svg');
+}
+
+.crone-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.crone{
+    font-size: 1.2em;
 }
 
 </style>

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TimeFlow.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+be58eee8615f5977d1d0c6b0ab751269f946d338")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c211f1f3d477ef4a232e2e93bfee1f652ce09b0b")]
 [assembly: System.Reflection.AssemblyProductAttribute("TimeFlow.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TimeFlow.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
