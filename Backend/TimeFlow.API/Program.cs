@@ -9,6 +9,7 @@ using TimeFlow.DAL.Models;
 using TimeFlow.DL.Repositories;
 using TimeFlow.DL.Services;
 using Microsoft.Extensions.DependencyInjection;
+using TimeFlow.DL.HttpClients;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Logging.ClearProviders();
@@ -24,6 +25,7 @@ builder.Services.AddTransient<IBaseRepository<Category>, BaseRepository<Category
 builder.Services.AddTransient<IBaseRepository<FriendRequest>, BaseRepository<FriendRequest>>();
 
 //Services
+builder.Services.AddTransient<IOidcService, OidcService>();
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<ITransactionService, TransactionService>();
 builder.Services.AddTransient<ICategoryService, CategoryService>();
@@ -82,6 +84,12 @@ builder.Services.AddControllers();
 builder.Services.AddSpaStaticFiles(configuration =>
 {
     configuration.RootPath = "wwwroot";
+});
+
+builder.Services.AddHttpClient<OAuthServerApiClient>(client =>
+{
+    client.BaseAddress = new Uri("https://localhost:7133");
+    client.Timeout = TimeSpan.FromSeconds(10);
 });
 
 var app = builder.Build();

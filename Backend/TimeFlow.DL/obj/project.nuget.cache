@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "/YKN/H8EnUA=",
+  "dgSpecHash": "Z1BaLp8rkVQ=",
   "success": true,
-  "projectFilePath": "E:\\Programming\\Server\\TimeFlow\\Backend\\TimeFlow.DL\\TimeFlow.DL.csproj",
+  "projectFilePath": "E:\\Programming\\CSharp\\PROJECTS\\TimeFlow\\Backend\\TimeFlow.DL\\TimeFlow.DL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\David Korobchenko\\.nuget\\packages\\automapper\\14.0.0\\automapper.14.0.0.nupkg.sha512",
     "C:\\Users\\David Korobchenko\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",

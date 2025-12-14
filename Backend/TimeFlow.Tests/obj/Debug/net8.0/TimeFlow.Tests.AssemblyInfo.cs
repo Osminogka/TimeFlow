@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TimeFlow.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+be58eee8615f5977d1d0c6b0ab751269f946d338")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f548a800cb54eeb770d281ee9aa7cb9b1bce9413")]
 [assembly: System.Reflection.AssemblyProductAttribute("TimeFlow.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TimeFlow.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

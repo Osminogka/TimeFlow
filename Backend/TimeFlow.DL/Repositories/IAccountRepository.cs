@@ -9,6 +9,7 @@ namespace TimeFlow.DL.Repositories
         IQueryable<AppUser> Get();
         Task<AppUser?> GetByEmailAsync(string email);
         Task<IdentityResult> CreateAsync(AppUser user, string password);
+        Task<IdentityResult> CreateWithOnlyUserAsync(AppUser user);
         Task<IdentityResult> DeleteAsync(AppUser user);
         Task<IdentityResult> UpdateAsync(AppUser user);
         UserManager<AppUser> GetUserManager();

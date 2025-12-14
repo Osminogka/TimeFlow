@@ -17,6 +17,22 @@
   },
   {
     "ContainingType": "TimeFlow.API.Controllers.AuthenticationController",
+    "Method": "OidcUserRegistration",
+    "RelativePath": "api/authentication/oidc",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "code",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TimeFlow.API.Controllers.AuthenticationController",
     "Method": "RegisterAsync",
     "RelativePath": "api/authentication/register",
     "HttpMethod": "POST",

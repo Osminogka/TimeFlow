@@ -40,6 +40,23 @@ namespace TimeFlow.DL.Repositories
             return IdentityResult.Failed();
         }
 
+        public async Task<IdentityResult> CreateWithOnlyUserAsync(AppUser user)
+        {
+            var result = await _userManager.CreateAsync(user);
+            if (result.Succeeded)
+            {
+                User baseUser = new User
+                {
+                    Username = user.UserName,
+                    Email = user.Email
+                };
+                await _userRepository.AddAsync(baseUser);
+
+                return result;
+            }
+            return IdentityResult.Failed();
+        } 
+
         public async Task<IdentityResult> DeleteAsync(AppUser user)
         {
             return await _userManager.DeleteAsync(user);

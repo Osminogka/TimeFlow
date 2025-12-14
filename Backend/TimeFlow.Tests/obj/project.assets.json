@@ -8996,11 +8996,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Programming\\Server\\TimeFlow\\Backend\\TimeFlow.Tests\\TimeFlow.Tests.csproj",
+      "projectUniqueName": "E:\\Programming\\CSharp\\PROJECTS\\TimeFlow\\Backend\\TimeFlow.Tests\\TimeFlow.Tests.csproj",
       "projectName": "TimeFlow.Tests",
-      "projectPath": "E:\\Programming\\Server\\TimeFlow\\Backend\\TimeFlow.Tests\\TimeFlow.Tests.csproj",
+      "projectPath": "E:\\Programming\\CSharp\\PROJECTS\\TimeFlow\\Backend\\TimeFlow.Tests\\TimeFlow.Tests.csproj",
       "packagesPath": "C:\\Users\\David Korobchenko\\.nuget\\packages\\",
-      "outputPath": "E:\\Programming\\Server\\TimeFlow\\Backend\\TimeFlow.Tests\\obj\\",
+      "outputPath": "E:\\Programming\\CSharp\\PROJECTS\\TimeFlow\\Backend\\TimeFlow.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -9022,14 +9022,14 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "E:\\Programming\\Server\\TimeFlow\\Backend\\TimeFlow.API\\TimeFlow.API.csproj": {
-              "projectPath": "E:\\Programming\\Server\\TimeFlow\\Backend\\TimeFlow.API\\TimeFlow.API.csproj"
+            "E:\\Programming\\CSharp\\PROJECTS\\TimeFlow\\Backend\\TimeFlow.API\\TimeFlow.API.csproj": {
+              "projectPath": "E:\\Programming\\CSharp\\PROJECTS\\TimeFlow\\Backend\\TimeFlow.API\\TimeFlow.API.csproj"
             },
-            "E:\\Programming\\Server\\TimeFlow\\Backend\\TimeFlow.DAL\\TimeFlow.DAL.csproj": {
-              "projectPath": "E:\\Programming\\Server\\TimeFlow\\Backend\\TimeFlow.DAL\\TimeFlow.DAL.csproj"
+            "E:\\Programming\\CSharp\\PROJECTS\\TimeFlow\\Backend\\TimeFlow.DAL\\TimeFlow.DAL.csproj": {
+              "projectPath": "E:\\Programming\\CSharp\\PROJECTS\\TimeFlow\\Backend\\TimeFlow.DAL\\TimeFlow.DAL.csproj"
             },
-            "E:\\Programming\\Server\\TimeFlow\\Backend\\TimeFlow.DL\\TimeFlow.DL.csproj": {
-              "projectPath": "E:\\Programming\\Server\\TimeFlow\\Backend\\TimeFlow.DL\\TimeFlow.DL.csproj"
+            "E:\\Programming\\CSharp\\PROJECTS\\TimeFlow\\Backend\\TimeFlow.DL\\TimeFlow.DL.csproj": {
+              "projectPath": "E:\\Programming\\CSharp\\PROJECTS\\TimeFlow\\Backend\\TimeFlow.DL\\TimeFlow.DL.csproj"
             }
           }
         }

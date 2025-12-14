@@ -4381,11 +4381,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Programming\\Server\\TimeFlow\\Backend\\TimeFlow.API\\TimeFlow.API.csproj",
+      "projectUniqueName": "E:\\Programming\\CSharp\\PROJECTS\\TimeFlow\\Backend\\TimeFlow.API\\TimeFlow.API.csproj",
       "projectName": "TimeFlow.API",
-      "projectPath": "E:\\Programming\\Server\\TimeFlow\\Backend\\TimeFlow.API\\TimeFlow.API.csproj",
+      "projectPath": "E:\\Programming\\CSharp\\PROJECTS\\TimeFlow\\Backend\\TimeFlow.API\\TimeFlow.API.csproj",
       "packagesPath": "C:\\Users\\David Korobchenko\\.nuget\\packages\\",
-      "outputPath": "E:\\Programming\\Server\\TimeFlow\\Backend\\TimeFlow.API\\obj\\",
+      "outputPath": "E:\\Programming\\CSharp\\PROJECTS\\TimeFlow\\Backend\\TimeFlow.API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -4407,11 +4407,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "E:\\Programming\\Server\\TimeFlow\\Backend\\TimeFlow.DAL\\TimeFlow.DAL.csproj": {
-              "projectPath": "E:\\Programming\\Server\\TimeFlow\\Backend\\TimeFlow.DAL\\TimeFlow.DAL.csproj"
+            "E:\\Programming\\CSharp\\PROJECTS\\TimeFlow\\Backend\\TimeFlow.DAL\\TimeFlow.DAL.csproj": {
+              "projectPath": "E:\\Programming\\CSharp\\PROJECTS\\TimeFlow\\Backend\\TimeFlow.DAL\\TimeFlow.DAL.csproj"
             },
-            "E:\\Programming\\Server\\TimeFlow\\Backend\\TimeFlow.DL\\TimeFlow.DL.csproj": {
-              "projectPath": "E:\\Programming\\Server\\TimeFlow\\Backend\\TimeFlow.DL\\TimeFlow.DL.csproj"
+            "E:\\Programming\\CSharp\\PROJECTS\\TimeFlow\\Backend\\TimeFlow.DL\\TimeFlow.DL.csproj": {
+              "projectPath": "E:\\Programming\\CSharp\\PROJECTS\\TimeFlow\\Backend\\TimeFlow.DL\\TimeFlow.DL.csproj"
             }
           }
         }

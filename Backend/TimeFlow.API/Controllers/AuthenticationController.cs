@@ -11,14 +11,16 @@ namespace TimeFlow.API.Controllers
     {
         private readonly IAccountService _authService;
         private readonly IAccountRepository _accountRepository;
+        private readonly IOidcService _oidcService;
         private readonly IMapper _mapper;
         private readonly ILogger<AuthenticationController> _logger;
 
-        public AuthenticationController(IAccountService authService, IAccountRepository accountRepository, IMapper mapper, ILogger<AuthenticationController> logger)
+        public AuthenticationController(IAccountService authService, IAccountRepository accountRepository, IOidcService oidcService, IMapper mapper, ILogger<AuthenticationController> logger)
 
         {
             _authService = authService;
             _accountRepository = accountRepository;
+            _oidcService = oidcService;
             _mapper = mapper;
             _logger = logger;
         }
@@ -51,6 +53,21 @@ namespace TimeFlow.API.Controllers
                 return Ok(result);
             }
             catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return HandleException(ex);
+            }
+        }
+
+        [HttpGet("oidc")]
+        public async Task<IActionResult> OidcUserRegistration([FromQuery] string code)
+        {
+            try
+            {
+                var result = await _oidcService.RegisterUserAsync(code);
+                return Ok(result);
+            }
+            catch(Exception ex)
             {
                 _logger.LogError(ex.Message);
                 return HandleException(ex);

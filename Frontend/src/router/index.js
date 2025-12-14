@@ -4,6 +4,10 @@ import authApi from "@/services/utils";
 
 const routes = [
     {
+        path: "/callback",
+        component: () => import("@/auth/CallbackPage.vue")
+    },
+    {
         path: "/login",
         name: "Login",
         component: () => import("../components/LoginPage.vue"),

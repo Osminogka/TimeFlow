@@ -1,5 +1,6 @@
 <script setup>
 import auth from '@/services/api/auth';
+import { login } from "@/auth/oidc";
 
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
@@ -93,6 +94,10 @@ function verifyLogin() {
             <p class="error-message" v-for="(error,key) in errorMessage" v-bind:key="key">{{ error }}</p>
         </div>
         <router-link class="button-redirect" :to="{ name: 'Login' }">Already have an account? Login here!</router-link>
+
+        <div class="oauth-button-container">
+            <button class="oauth-button" @click="login">Login with OAuthServer</button>
+        </div>
     </div>
 </template>
 
@@ -186,4 +191,28 @@ h1 {
     margin-top: 1em;
 }
 
+/* OAuth button styling */
+.oauth-button-container {
+    margin-top: 1.5rem;
+}
+
+.oauth-button {
+    cursor: pointer;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 1rem;
+    color: white;
+    background: linear-gradient(90deg, #4285f4, #34a853, #fbbc05, #ea4335); /* Google-style rainbow gradient */
+    background-size: 300% 100%;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.oauth-button:hover {
+    background-position: 100% 0;
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
 </style>
